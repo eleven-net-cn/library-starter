@@ -38,12 +38,12 @@ const _promptSchemaLibrarySuggest = {
   properties: {
     useSuggestedName: {
       description: colors.cyan(
-        'Would you like it to be called "' + libraryNameSuggested() + '"? [Yes/No]'
+        'Would you like it to be called "' + libraryNameSuggested() + '"? [Yes/No/y/n]'
       ),
       pattern: /^(y(es)?|n(o)?)$/i,
       type: 'string',
       required: true,
-      message: 'You need to type "Yes" or "No" to continue...'
+      message: 'You need to type "Yes/No/y/n" to continue...'
     }
   }
 }
