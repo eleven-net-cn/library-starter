@@ -1,6 +1,6 @@
 # library-tpl
 
-使用 TS 编写 js 库时， [typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter) 是一个不错的选择，但是，该脚手架附加的内容过多，且更新不太及时。
+使用 TS 编写 js 库时， [typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter) 是一个不错的选择，但是，该脚手架附加的内容过多，更新不太及时。
 
 这里对 [typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter) 进行了精简、升级：
 
@@ -10,7 +10,7 @@
 
 满足日常的工具库编译模版需求。
 
-## 运行命令
+## Command
 
 ```sh
 yarn start          # 本地调试
@@ -23,12 +23,12 @@ yarn test:prod      # tslint & Jest
 yarn commit         # 规范 commit
 ```
 
-## 使用步骤
+## Usage
 
 ```sh
-git clone https://github.com/alexjoverm/typescript-library-starter.git YOURFOLDERNAME
-cd YOURFOLDERNAME
+git clone https://github.com/Eleven90/library-tpl.git YOUR_FOLDER_NAME
+cd YOUR_FOLDER_NAME
 
-# Run npm install and write your library name when asked. That's all!
+# Run yarn install and write your library name when asked. That's all!
 yarn install
 ```
