@@ -9,7 +9,7 @@
   "files": [
     "dist"
   ],
-  "author": "--username-- <--usermail-->",
+  "author": "--username--",
   "repository": {
     "type": "git",
     "url": ""
@@ -94,6 +94,7 @@
     "jest": "^23.6.0",
     "jest-config": "^23.6.0",
     "lint-staged": "^8.0.0",
+    "lodash.camelcase": "^4.3.0",
     "prettier": "^1.14.3",
     "prompt": "^1.0.0",
     "replace-in-file": "^3.4.2",
@@ -112,7 +113,5 @@
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.0.3"
   },
-  "dependencies": {
-    "lodash.camelcase": "^4.3.0"
-  }
+  "dependencies": {}
 }

@@ -1,5 +1,5 @@
 /**
- * Dummy test
+ * Jest test
  */
 describe('Dummy test', () => {
   it('works if true is truthy', () => {
