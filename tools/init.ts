@@ -161,7 +161,7 @@ function setupLibrary(libraryName: string) {
 
   finalize()
 
-  console.log(colors.cyan("OK, you're all set. Happy coding!! ;)\n"))
+  console.log(colors.cyan("OK, you're all set. Happy coding!!\n"))
 }
 
 /**

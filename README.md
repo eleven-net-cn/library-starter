@@ -12,7 +12,7 @@
 
 ## Usage
 
-1. clone this repository
+1. clone 仓库代码
 
     ```sh
     git clone https://github.com/Eleven90/library-starter.git YOUR_PROJECT_FOLDER_NAME
@@ -20,7 +20,7 @@
     cd YOUR_PROJECT_FOLDER_NAME
     ```
 
-2. yarn install & write your library name
+2. `yarn install` 安装依赖包 & 命名 library（该名称会被处理成小驼峰变量，作为 UMD 模块挂载的全局变量）
 
     ```sh
     # Run yarn install and write your library name when asked. That's all!
