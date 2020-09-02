@@ -37,5 +37,5 @@ yarn test           # Jest
 yarn test:watch     # Jest & watch
 yarn test:prod      # tslint & Jest
 
-yarn commit         # 规范 commit
+yarn lint           # tslint
 ```

@@ -20,21 +20,24 @@
   },
   "scripts": {
     "start": "rollup -c rollup.config.ts --environment NODE_ENV:development -w",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts --environment NODE_ENV:production",
+    "build": "rimraf dist && tsc --module commonjs && rollup -c rollup.config.ts --environment NODE_ENV:production",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:prod": "npm run lint && npm run test -- --no-cache",
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "commit": "git-cz",
-    "postinstall": "ts-node tools/init",
-    "prebuild": "rimraf dist",
-    "precommit": "lint-staged"
+    "postinstall": "ts-node tools/init"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
       "prettier --write",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "pre-commit": "exec < /dev/tty && lint-staged"
+    }
   },
   "config": {
     "commitizen": {
