@@ -27,18 +27,14 @@
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "commit": "git-cz",
     "postinstall": "ts-node tools/init",
-    "prebuild": "rimraf dist"
+    "prebuild": "rimraf dist",
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
       "prettier --write",
       "git add"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "exec < /dev/tty && lint-staged"
-    }
   },
   "config": {
     "commitizen": {
