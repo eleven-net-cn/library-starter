@@ -1,7 +1,9 @@
+import path from 'path'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import sourceMaps from 'rollup-plugin-sourcemaps'
 import typescript from 'rollup-plugin-typescript2'
+import alias from '@rollup/plugin-alias'
 import json from '@rollup/plugin-json'
 import { terser } from 'rollup-plugin-terser'
 import banner from 'rollup-plugin-banner'
@@ -24,6 +26,11 @@ export default {
     include: 'src/**'
   },
   plugins: [
+    alias({
+      entries: {
+        '@': path.resolve(__dirname, 'src'),
+      },
+    }),
     // Allow json resolution
     json(),
     // Compile TypeScript files

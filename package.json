@@ -1,6 +1,6 @@
 {
   "name": "--libraryname--",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "keywords": [],
   "main": "dist/--libraryname--.umd.js",
@@ -21,9 +21,10 @@
   "scripts": {
     "start": "rollup -c rollup.config.ts --environment NODE_ENV:development -w",
     "build": "rimraf dist && tsc --module commonjs && rollup -c rollup.config.ts --environment NODE_ENV:production",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watchAll",
     "test:prod": "npm run lint && npm run test -- --no-cache",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "postinstall": "ts-node tools/init"
   },
@@ -55,6 +56,9 @@
       "tsx",
       "js"
     ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/test/"
@@ -83,6 +87,7 @@
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^7.1.2",
+    "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
