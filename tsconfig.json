@@ -1,27 +1,30 @@
-{
+/**
+ * 推荐：
+ *  1.tsc 仅做类型检查、生成声明文件的工作，.ts 文件编译工作交给 rollup
+ *  2.本地开发时，tsc 承担类型检查工作，不必输出编译文件（包括声明文件）
+ *  3.build 打包时，tsc 承担类型检查、生成声明文件工作
+ */
+ {
   "compilerOptions": {
     "moduleResolution": "node",
     "target": "es5",
-    "module":"es2015",
+    "module": "es2015",
     "lib": ["es2015", "es2016", "es2017", "dom"],
     "strict": true,
-    "sourceMap": true,
     "declaration": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "emitDeclarationOnly": true, // 仅输出类型定义文件
     "declarationDir": "dist/types",
     "outDir": "dist/lib",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": [
-    "src",
-    "test"
-  ]
+  "include": ["src"]
 }

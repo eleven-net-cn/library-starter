@@ -1,6 +1,6 @@
 {
   "name": "--libraryname--",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "",
   "keywords": [],
   "main": "dist/--libraryname--.umd.js",
@@ -19,12 +19,12 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "start": "rollup -c rollup.config.ts --environment NODE_ENV:development -w",
-    "build": "rimraf dist && tsc --module commonjs && rollup -c rollup.config.ts --environment NODE_ENV:production",
+    "start": "concurrently \"rollup -c rollup.config.ts --environment NODE_ENV:development -w\" \"tsc -p tsconfig.dev.json -w\"",
+    "build": "concurrently \"rollup -c rollup.config.ts --environment NODE_ENV:production\" \"tsc\"",
+    "build:docs": "typedoc",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watchAll",
     "test:prod": "npm run lint && npm run test -- --no-cache",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "postinstall": "ts-node tools/init"
   },
@@ -49,6 +49,10 @@
     "transform": {
       ".(ts|tsx)": "ts-jest"
     },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "node_modules"
+    ],
     "testEnvironment": "jsdom",
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
@@ -85,9 +89,17 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "@babel/runtime-corejs3": "^7.11.2",
     "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^7.1.2",
     "@rollup/plugin-alias": "^3.1.1",
+    "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
@@ -95,6 +107,7 @@
     "@types/node": "^14.6.2",
     "colors": "^1.3.2",
     "commitizen": "^3.0.0",
+    "concurrently": "^5.3.0",
     "coveralls": "^3.0.2",
     "cross-env": "^7.0.2",
     "cz-conventional-changelog": "^3.3.0",
@@ -109,10 +122,10 @@
     "rimraf": "^2.6.2",
     "rollup": "^2.26.9",
     "rollup-plugin-banner": "^0.2.1",
+    "rollup-plugin-cleaner": "^1.0.0",
     "rollup-plugin-filesize": "^9.0.2",
     "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-terser": "^6.1.0",
-    "rollup-plugin-typescript2": "^0.27.1",
     "shelljs": "^0.8.3",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
