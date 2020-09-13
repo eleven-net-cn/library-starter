@@ -1,10 +1,10 @@
 {
   "name": "--libraryname--",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "",
   "keywords": [],
   "main": "dist/--libraryname--.umd.js",
-  "module": "dist/--libraryname--.es5.js",
+  "module": "dist/--libraryname--.es.js",
   "typings": "dist/types/--libraryname--.d.ts",
   "files": [
     "dist"
@@ -30,8 +30,7 @@
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "husky": {
