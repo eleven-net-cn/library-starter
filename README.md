@@ -4,9 +4,12 @@
 
 这里对 [typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter) 进行了精简、升级：
 
-1. 升级 rollup 开发依赖版本，增加 Terser Plugin 等
-2. 保留 Jest、tslint 等
-3. 移除 TypeDoc、Travis、Semantic release 等（需要注册诸多相关网站，配置累赘、复杂，弃之）
+1. 【升级】 rollup 开发依赖版本，增加 Terser Plugin 等
+2. 【升级】使用 Babel 编译 TypeScript 代码，而 tsc 仅用于：代码检查、生成声明文件等
+3. 【升级】Jest 单元测试，放弃 ts-jest 转换测试代码
+4. 【升级】使用 eslint 替换 tslint
+2. 【优化】保留 TypeDoc 自动生成文档，并做升级优化
+5. 【移除】移除 Travis、Semantic release 等（需要注册诸多相关网站，配置累赘、复杂，弃之）
 
 满足日常的 js 库开发需求。
 
