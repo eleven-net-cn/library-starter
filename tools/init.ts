@@ -152,15 +152,17 @@ function setupLibrary(libraryName: string) {
 
   finalize()
 
-  console.log(colors.green('Success! The project initialization is complete.\n'))
+  console.log(colors.green('Success! The library initialization is complete.\n'))
   console.log('Inside that directory, you can run several commands:\n')
 
   console.log(colors.cyan('  yarn start'))
-  console.log('    Starts the development server.\n')
+  console.log('    Starts the development compiler.\n')
   console.log(colors.cyan('  yarn test'))
   console.log('    Starts the jest runner.\n')
   console.log(colors.cyan('  yarn build'))
   console.log('    Bundles the library for production.\n')
+  console.log(colors.cyan('  yarn commit'))
+  console.log('    Standard writing and commiting information.\n')
 }
 
 /**
