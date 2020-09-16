@@ -3,6 +3,5 @@
   "compilerOptions": {
     "emitDeclarationOnly": false,
     "noEmit": true // 不输出编译文件（与 emitDeclarationOnly: true 互斥）
-  },
-  "include": ["src", "test"]
+  }
 }

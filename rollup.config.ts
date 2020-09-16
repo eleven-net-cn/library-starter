@@ -11,9 +11,10 @@ import banner from 'rollup-plugin-banner'
 import filesize from 'rollup-plugin-filesize'
 import camelCase from 'lodash.camelcase'
 import cleaner from 'rollup-plugin-cleaner'
+import eslint from '@rbnlffl/rollup-plugin-eslint'
+import pkg from './package.json'
 
 const libraryName = '--libraryname--'
-const pkg = require('./package.json')
 const isProd = process.env.NODE_ENV === 'production'
 
 const pluginsProd = isProd
@@ -47,12 +48,11 @@ export default {
   input: `src/${libraryName}.ts`,
   output: [
     { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
-    { file: pkg.module, format: 'es', sourcemap: true }
+    { file: pkg.module, format: 'es', sourcemap: true },
   ],
-  // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
   external: [],
   watch: {
-    include: 'src/**'
+    include: 'src/**',
   },
   plugins: [
     alias({
@@ -60,19 +60,21 @@ export default {
         '@': path.resolve(__dirname, 'src'),
       },
     }),
-    // Allow json resolution
     json(),
-    // Compile TypeScript files & ES proposal API
     babel({
       babelHelpers: 'runtime',
       extensions: [...DEFAULT_EXTENSIONS, '.ts'],
       exclude: /node_modules/,
     }),
-    // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
     commonjs(),
     nodeResolve({
       extensions: [...DEFAULT_EXTENSIONS, '.ts', '.json'],
     }),
+    eslint({
+      extensions: ['.js', '.ts'],
+      filterInclude: ['src/**'],
+      filterExclude: ['node_modules/**'],
+    }),
     ...pluginsProd,
-  ]
+  ],
 }

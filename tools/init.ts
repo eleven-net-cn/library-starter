@@ -12,14 +12,10 @@ const { fork } = require('child_process')
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools']
 const rmFiles = ['.gitattributes', 'tools/init.ts']
-const modifyFiles = [
-  'package.json',
-  'rollup.config.ts',
-  'test/library.test.ts',
-]
+const modifyFiles = ['package.json', 'rollup.config.ts', 'test/library.test.ts']
 const renameFiles = [
   ['src/library.ts', 'src/--libraryname--.ts'],
-  ['test/library.test.ts', 'test/--libraryname--.test.ts']
+  ['test/library.test.ts', 'test/--libraryname--.test.ts'],
 ]
 
 const _promptSchemaLibraryName = {
@@ -29,9 +25,9 @@ const _promptSchemaLibraryName = {
       pattern: /^[a-z]+(\-[a-z]+)*$/,
       type: 'string',
       required: true,
-      message: '"kebab-case" uses lowercase letters, and hyphens for any punctuation'
-    }
-  }
+      message: '"kebab-case" uses lowercase letters, and hyphens for any punctuation',
+    },
+  },
 }
 
 const _promptSchemaLibrarySuggest = {
@@ -43,9 +39,9 @@ const _promptSchemaLibrarySuggest = {
       pattern: /^(y(es)?|n(o)?)$/i,
       type: 'string',
       required: true,
-      message: 'You need to type "Yes/No/y/n" to continue...'
-    }
-  }
+      message: 'You need to type "Yes/No/y/n" to continue...',
+    },
+  },
 }
 
 _prompt.start()
@@ -59,9 +55,6 @@ if (!which('git')) {
   removeItems()
   process.exit(1)
 }
-
-// Say hi!
-console.log(colors.cyan("Hi! You're almost ready to make the next great TypeScript library."))
 
 // Generate the library name and start the tasks
 if (process.env.CI == null) {
@@ -145,9 +138,7 @@ function libraryNameSuggestedIsDefault() {
  * @param libraryName
  */
 function setupLibrary(libraryName: string) {
-  console.log(
-    colors.cyan('\nThanks for the info. The last few changes are being made... hang tight!\n\n')
-  )
+  console.log(colors.cyan('\nThe project is initializing...\n'))
 
   // Get the Git username and email before the .git directory is removed
   let username = exec('git config user.name').stdout.trim()
@@ -161,15 +152,21 @@ function setupLibrary(libraryName: string) {
 
   finalize()
 
-  console.log(colors.cyan("OK, you're all set. Happy coding!!\n"))
+  console.log(colors.green('Success! The project initialization is complete.\n\n'))
+  console.log('Inside that directory, you can run several commands:\n\n')
+
+  console.log(colors.cyan('yarn start\n'))
+  console.log('Starts the development server.\n\n')
+  console.log(colors.cyan('yarn test\n'))
+  console.log('Starts the jest runner.\n\n')
+  console.log(colors.cyan('yarn build\n'))
+  console.log('Bundles the library for production.\n\n')
 }
 
 /**
  * Removes items from the project that aren't needed after the initial setup
  */
 function removeItems() {
-  console.log(colors.underline.white('Removed'))
-
   // The directories and files are combined here, to simplify the function,
   // as the 'rm' command checks the item type before attempting to remove it
   let rmItems = rmDirs.concat(rmFiles)
@@ -177,9 +174,6 @@ function removeItems() {
     '-rf',
     rmItems.map(f => path.resolve(__dirname, '..', f))
   )
-  console.log(colors.red(rmItems.join('\n')))
-
-  console.log('\n')
 }
 
 /**
@@ -190,21 +184,16 @@ function removeItems() {
  * @param usermail
  */
 function modifyContents(libraryName: string, username: string, usermail: string) {
-  console.log(colors.underline.white('Modified'))
-
   let files = modifyFiles.map(f => path.resolve(__dirname, '..', f))
   try {
     const changes = replace.sync({
       files,
       from: [/--libraryname--/g, /--username--/g, /--usermail--/g],
-      to: [libraryName, username, usermail]
+      to: [libraryName, username, usermail],
     })
-    console.log(colors.yellow(modifyFiles.join('\n')))
   } catch (error) {
     console.error('An error occurred modifying the file: ', error)
   }
-
-  console.log('\n')
 }
 
 /**
@@ -213,30 +202,23 @@ function modifyContents(libraryName: string, username: string, usermail: string)
  * @param libraryName
  */
 function renameItems(libraryName: string) {
-  console.log(colors.underline.white('Renamed'))
-
-  renameFiles.forEach(function(files) {
+  renameFiles.forEach(function (files) {
     // Files[0] is the current filename
     // Files[1] is the new name
     let newFilename = files[1].replace(/--libraryname--/g, libraryName)
     mv(path.resolve(__dirname, '..', files[0]), path.resolve(__dirname, '..', newFilename))
     console.log(colors.cyan(files[0] + ' => ' + newFilename))
   })
-
-  console.log('\n')
 }
 
 /**
  * Calls any external programs to finish setting up the library
  */
 function finalize() {
-  console.log(colors.underline.white('Finalizing'))
-
   // Recreate Git folder
   let gitInitOutput = exec('git init "' + path.resolve(__dirname, '..') + '"', {
-    silent: true
+    silent: true,
   }).stdout
-  console.log(colors.green(gitInitOutput.replace(/(\n|\r)+/g, '')))
 
   // Remove post-install command
   let jsonPackage = path.resolve(__dirname, '..', 'package.json')
@@ -246,11 +228,7 @@ function finalize() {
   delete pkg.scripts.postinstall
 
   writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2))
-  console.log(colors.green('Postinstall script has been removed'))
 
   // Initialize Husky
   fork(path.resolve(__dirname, '..', 'node_modules', 'husky', 'bin', 'install'), { silent: true })
-  console.log(colors.green('Git hooks set up'))
-
-  console.log('\n')
 }
