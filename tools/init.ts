@@ -138,11 +138,11 @@ function libraryNameSuggestedIsDefault() {
  * @param libraryName
  */
 function setupLibrary(libraryName: string) {
-  console.log(colors.cyan('\nThe project is initializing...\n'))
+  console.log(colors.cyan('\nInitializing...\n'))
 
   // Get the Git username and email before the .git directory is removed
-  let username = exec('git config user.name').stdout.trim()
-  let usermail = exec('git config user.email').stdout.trim()
+  let username = exec('git config user.name', {silent:true}).stdout.trim()
+  let usermail = exec('git config user.email', {silent:true}).stdout.trim()
 
   removeItems()
 
@@ -152,15 +152,15 @@ function setupLibrary(libraryName: string) {
 
   finalize()
 
-  console.log(colors.green('Success! The project initialization is complete.\n\n'))
-  console.log('Inside that directory, you can run several commands:\n\n')
+  console.log(colors.green('Success! The project initialization is complete.\n'))
+  console.log('Inside that directory, you can run several commands:\n')
 
-  console.log(colors.cyan('yarn start\n'))
-  console.log('Starts the development server.\n\n')
-  console.log(colors.cyan('yarn test\n'))
-  console.log('Starts the jest runner.\n\n')
-  console.log(colors.cyan('yarn build\n'))
-  console.log('Bundles the library for production.\n\n')
+  console.log(colors.cyan('  yarn start'))
+  console.log('    Starts the development server.\n')
+  console.log(colors.cyan('  yarn test'))
+  console.log('    Starts the jest runner.\n')
+  console.log(colors.cyan('  yarn build'))
+  console.log('    Bundles the library for production.\n')
 }
 
 /**
@@ -207,7 +207,6 @@ function renameItems(libraryName: string) {
     // Files[1] is the new name
     let newFilename = files[1].replace(/--libraryname--/g, libraryName)
     mv(path.resolve(__dirname, '..', files[0]), path.resolve(__dirname, '..', newFilename))
-    console.log(colors.cyan(files[0] + ' => ' + newFilename))
   })
 }
 
