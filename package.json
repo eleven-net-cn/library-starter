@@ -30,8 +30,7 @@
   "lint-staged": {
     "{src,test}/**/*.{js,ts}": [
       "prettier --write",
-      "npm run lint:fix",
-      "git add"
+      "npm run lint:fix"
     ]
   },
   "husky": {
