@@ -1,13 +1,14 @@
+/* eslint-disable */
 /**
  * This script runs automatically after your first npm-install.
  */
-import _prompt from 'prompt'
-import { mv, rm, which, exec } from 'shelljs'
-import replace from 'replace-in-file'
-import colors from 'colors'
-import path from 'path'
-import { readFileSync, writeFileSync } from 'fs'
-import { fork } from 'child_process'
+const _prompt = require('prompt')
+const { mv, rm, which, exec } = require('shelljs')
+const replace = require('replace-in-file')
+const colors = require('colors')
+const path = require('path')
+const { readFileSync, writeFileSync } = require('fs')
+const { fork } = require('child_process')
 
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools']
@@ -22,7 +23,6 @@ const _promptSchemaLibraryName = {
   properties: {
     library: {
       description: colors.cyan('What do you want the library to be called? (use kebab-case)'),
-      // eslint-disable-next-line no-useless-escape
       pattern: /^[a-z]+(\-[a-z]+)*$/,
       type: 'string',
       required: true,

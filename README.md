@@ -18,10 +18,10 @@
     cd YOUR_PROJECT_FOLDER_NAME
     ```
 
-2. `yarn install` 安装依赖包 & 命名 library（该名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量）
+2. 安装依赖包 & 命名 library（该名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量）
 
     ```sh
-    yarn install
+    yarn / yarn install
     ```
 
 ## Command
