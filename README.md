@@ -42,5 +42,3 @@ yarn lint:fix       # 运行 eslint & 自动 fix 代码
 ## Example
 
 ![](./clone.gif)
-
-![](./install.gif)
