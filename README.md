@@ -18,7 +18,9 @@
     cd YOUR_PROJECT_FOLDER_NAME
     ```
 
-2. 安装依赖包 & 命名 library（该名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量）
+2. 安装依赖包 & 命名 library
+
+    > 该 library 名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量。例如：library 名称为 my-lib，默认情况下，UMD 模块挂载的全局变量是 `window.myLib`、`global.myLib`。
 
     ```sh
     yarn / yarn install
