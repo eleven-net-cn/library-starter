@@ -12,7 +12,7 @@ const { fork } = require('child_process')
 
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools']
-const rmFiles = ['.gitattributes', 'tools/init.ts']
+const rmFiles = ['.gitattributes', 'tools/init.ts', 'clone.gif', 'install.gif']
 const modifyFiles = ['package.json', 'rollup.config.ts', 'test/library.test.ts']
 const renameFiles = [
   ['src/library.ts', 'src/--libraryname--.ts'],
@@ -225,11 +225,13 @@ function finalize() {
   // Remove post-install command
   const jsonPackage = path.resolve(__dirname, '..', 'package.json')
   const pkg = JSON.parse(readFileSync(jsonPackage) as any)
+  const readme = path.resolve(__dirname, '..', 'README.md')
 
   // Note: Add items to remove from the package file here
   delete pkg.scripts.postinstall
 
   writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2))
+  writeFileSync(readme, `# ${pkg.name}`)
 
   // Initialize Husky
   fork(path.resolve(__dirname, '..', 'node_modules', 'husky', 'bin', 'install'), { silent: true })

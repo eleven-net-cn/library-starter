@@ -38,3 +38,9 @@ yarn commit         # 规范 commit
 yarn lint           # 运行 eslint，查看 lint 提示
 yarn lint:fix       # 运行 eslint & 自动 fix 代码
 ```
+
+## Example
+
+![](./clone.gif)
+
+![](./install.gif)
