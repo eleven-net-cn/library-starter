@@ -1,4 +1,4 @@
-# [library-starter](https://github.com/Eleven90/library-starter)
+# [library-starter](https://github.com/eleven-net-cn/library-starter)
 
 - Babel 编译 TypeScript 代码，tsc 代码检查、生成声明文件等
 - Jest 单元测试，使用 ts-jest 转换测试代码、`test` 目录的 Typescript 代码检查
@@ -13,7 +13,7 @@
     > YOUR_PROJECT_FOLDER_NAME 是你的项目目录名，建议明确指定。
 
     ```sh
-    git clone https://github.com/Eleven90/library-starter.git YOUR_PROJECT_FOLDER_NAME
+    git clone https://github.com/eleven-net-cn/library-starter.git YOUR_PROJECT_FOLDER_NAME
 
     cd YOUR_PROJECT_FOLDER_NAME
     ```
