@@ -1,13 +1,13 @@
 /**
  * This script runs automatically after your first npm-install.
  */
-const _prompt = require('prompt')
-const { mv, rm, which, exec } = require('shelljs')
-const replace = require('replace-in-file')
-const colors = require('colors')
-const path = require('path')
-const { readFileSync, writeFileSync } = require('fs')
-const { fork } = require('child_process')
+import _prompt from 'prompt'
+import { mv, rm, which, exec } from 'shelljs'
+import replace from 'replace-in-file'
+import colors from 'colors'
+import path from 'path'
+import { readFileSync, writeFileSync } from 'fs'
+import { fork } from 'child_process'
 
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools']
@@ -22,6 +22,7 @@ const _promptSchemaLibraryName = {
   properties: {
     library: {
       description: colors.cyan('What do you want the library to be called? (use kebab-case)'),
+      // eslint-disable-next-line no-useless-escape
       pattern: /^[a-z]+(\-[a-z]+)*$/,
       type: 'string',
       required: true,
@@ -141,8 +142,8 @@ function setupLibrary(libraryName: string) {
   console.log(colors.cyan('\nInitializing...\n'))
 
   // Get the Git username and email before the .git directory is removed
-  let username = exec('git config user.name', {silent:true}).stdout.trim()
-  let usermail = exec('git config user.email', {silent:true}).stdout.trim()
+  const username = exec('git config user.name', { silent: true }).stdout.trim()
+  const usermail = exec('git config user.email', { silent: true }).stdout.trim()
 
   removeItems()
 
@@ -171,7 +172,7 @@ function setupLibrary(libraryName: string) {
 function removeItems() {
   // The directories and files are combined here, to simplify the function,
   // as the 'rm' command checks the item type before attempting to remove it
-  let rmItems = rmDirs.concat(rmFiles)
+  const rmItems = rmDirs.concat(rmFiles)
   rm(
     '-rf',
     rmItems.map(f => path.resolve(__dirname, '..', f))
@@ -186,9 +187,9 @@ function removeItems() {
  * @param usermail
  */
 function modifyContents(libraryName: string, username: string, usermail: string) {
-  let files = modifyFiles.map(f => path.resolve(__dirname, '..', f))
+  const files = modifyFiles.map(f => path.resolve(__dirname, '..', f))
   try {
-    const changes = replace.sync({
+    replace.sync({
       files,
       from: [/--libraryname--/g, /--username--/g, /--usermail--/g],
       to: [libraryName, username, usermail],
@@ -207,7 +208,7 @@ function renameItems(libraryName: string) {
   renameFiles.forEach(function (files) {
     // Files[0] is the current filename
     // Files[1] is the new name
-    let newFilename = files[1].replace(/--libraryname--/g, libraryName)
+    const newFilename = files[1].replace(/--libraryname--/g, libraryName)
     mv(path.resolve(__dirname, '..', files[0]), path.resolve(__dirname, '..', newFilename))
   })
 }
@@ -217,12 +218,12 @@ function renameItems(libraryName: string) {
  */
 function finalize() {
   // Recreate Git folder
-  let gitInitOutput = exec('git init "' + path.resolve(__dirname, '..') + '"', {
+  exec('git init "' + path.resolve(__dirname, '..') + '"', {
     silent: true,
   }).stdout
 
   // Remove post-install command
-  let jsonPackage = path.resolve(__dirname, '..', 'package.json')
+  const jsonPackage = path.resolve(__dirname, '..', 'package.json')
   const pkg = JSON.parse(readFileSync(jsonPackage) as any)
 
   // Note: Add items to remove from the package file here
