@@ -10,21 +10,21 @@
 
 1. clone 仓库代码
 
-    > YOUR_PROJECT_FOLDER_NAME 是你的项目目录名，建议明确指定。
+   > YOUR_PROJECT_FOLDER_NAME 是你的项目目录名，建议明确指定。
 
-    ```sh
-    git clone https://github.com/eleven-net-cn/library-starter.git YOUR_PROJECT_FOLDER_NAME
+   ```sh
+   git clone https://github.com/eleven-net-cn/library-starter.git YOUR_PROJECT_FOLDER_NAME
 
-    cd YOUR_PROJECT_FOLDER_NAME
-    ```
+   cd YOUR_PROJECT_FOLDER_NAME
+   ```
 
 2. 安装依赖包 & 命名 library
 
-    > 该 library 名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量。例如：library 名称为 my-lib，默认情况下，UMD 模块挂载的全局变量是 `window.myLib`、`global.myLib`。
+   > 该 library 名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量。例如：library 名称为 my-lib，默认情况下，UMD 模块挂载的全局变量是 `window.myLib`、`global.myLib`。
 
-    ```sh
-    yarn / yarn install
-    ```
+   ```sh
+   yarn / yarn install
+   ```
 
 ## Command
 
@@ -38,7 +38,3 @@ yarn commit         # 规范 commit
 yarn lint           # 运行 eslint，查看 lint 提示
 yarn lint:fix       # 运行 eslint & 自动 fix 代码
 ```
-
-## Example
-
-![](./clone.gif)
