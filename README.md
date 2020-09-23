@@ -33,7 +33,7 @@ yarn start          # 本地调试 & tsc 类型检查（src 目录）
 yarn test           # 启动 Jest 测试 & 查看测试覆盖率 & 类型检查（test 目录）
 yarn build          # 打包 & 类型检查 & 生成声明文件 & 生成 docs 文档
 
-yarn commit         # 规范 commit
+yarn commit         # 交互式 git commit，规范 commit message
 
 yarn lint           # 运行 eslint，查看 lint 提示
 yarn lint:fix       # 运行 eslint & 自动 fix 代码
