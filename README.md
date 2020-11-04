@@ -1,5 +1,7 @@
 # [library-starter](https://github.com/eleven-net-cn/library-starter)
 
+Typescript 工具类库快速启动工具
+
 - Babel 编译 TypeScript 代码，tsc 代码检查、生成声明文件等
 - Jest 单元测试，使用 ts-jest 转换测试代码、`test` 目录的 Typescript 代码检查
 - TypeDoc 自动生成文档
