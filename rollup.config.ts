@@ -6,6 +6,7 @@ import babel from '@rollup/plugin-babel'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
 import alias from '@rollup/plugin-alias'
 import json from '@rollup/plugin-json'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
 import banner from 'rollup-plugin-banner'
 import filesize from 'rollup-plugin-filesize'
@@ -55,6 +56,10 @@ export default {
     include: 'src/**',
   },
   plugins: [
+    /**
+     * 不需要打包的第三方依赖，在 peerDependencies 中声明，将自动添加到 externnal 不参与打包。
+     */
+    peerDepsExternal(),
     alias({
       entries: {
         '@': path.resolve(__dirname, 'src'),
