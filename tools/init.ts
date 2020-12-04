@@ -162,8 +162,6 @@ function setupLibrary(libraryName: string) {
   console.log('    Starts the jest runner.\n')
   console.log(colors.cyan('  yarn build'))
   console.log('    Bundles the library for production.\n')
-  console.log(colors.cyan('  yarn commit'))
-  console.log('    Standard writing and commiting information.\n')
 }
 
 /**
