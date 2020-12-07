@@ -22,8 +22,9 @@
   "scripts": {
     "start": "concurrently \"rollup -c rollup.config.ts --environment NODE_ENV:development -w\" \"tsc -p tsconfig.dev.json -w\"",
     "test": "jest --coverage --watchAll",
-    "build": "concurrently \"rollup -c rollup.config.ts --environment NODE_ENV:production\" \"tsc\" \"typedoc\"",
-    "prepublishOnly": "yarn build",
+    "build": "concurrently \"rollup -c rollup.config.ts --environment NODE_ENV:production\" \"tsc\" \"npm run docs\"",
+    "docs": "typedoc",
+    "prepublishOnly": "npm run build",
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "eslint . --ext .js,.ts --fix",
     "postinstall": "ts-node tools/init"
