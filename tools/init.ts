@@ -2,22 +2,22 @@
 /**
  * This script runs automatically after your first npm-install.
  */
-const _prompt = require('prompt')
-const { mv, rm, which, exec } = require('shelljs')
-const replace = require('replace-in-file')
-const colors = require('colors')
-const path = require('path')
-const { readFileSync, writeFileSync } = require('fs')
-const { fork } = require('child_process')
+const _prompt = require('prompt');
+const { mv, rm, which, exec } = require('shelljs');
+const replace = require('replace-in-file');
+const colors = require('colors');
+const path = require('path');
+const { readFileSync, writeFileSync } = require('fs');
+const { fork } = require('child_process');
 
 // Note: These should all be relative to the project root directory
-const rmDirs = ['.git', 'tools']
-const rmFiles = ['.gitattributes', 'tools/init.ts', 'install.gif']
-const modifyFiles = ['package.json', 'rollup.config.ts', 'test/library.test.ts']
+const rmDirs = ['.git', 'tools'];
+const rmFiles = ['.gitattributes', 'tools/init.ts', 'install.gif'];
+const modifyFiles = ['package.json', 'rollup.config.ts', 'test/library.test.ts'];
 const renameFiles = [
   ['src/library.ts', 'src/--libraryname--.ts'],
   ['test/library.test.ts', 'test/--libraryname--.test.ts'],
-]
+];
 
 const _promptSchemaLibraryName = {
   properties: {
@@ -29,7 +29,7 @@ const _promptSchemaLibraryName = {
       message: '"kebab-case" uses lowercase letters, and hyphens for any punctuation',
     },
   },
-}
+};
 
 const _promptSchemaLibrarySuggest = {
   properties: {
@@ -43,30 +43,30 @@ const _promptSchemaLibrarySuggest = {
       message: 'You need to type "Yes/No/y/n" to continue...',
     },
   },
-}
+};
 
-_prompt.start()
-_prompt.message = ''
+_prompt.start();
+_prompt.message = '';
 
 // Clear console
-process.stdout.write('\x1B[2J\x1B[0f')
+process.stdout.write('\x1B[2J\x1B[0f');
 
 if (!which('git')) {
-  console.log(colors.red('Sorry, this script requires git'))
-  removeItems()
-  process.exit(1)
+  console.log(colors.red('Sorry, this script requires git'));
+  removeItems();
+  process.exit(1);
 }
 
 // Generate the library name and start the tasks
 if (process.env.CI == null) {
   if (!libraryNameSuggestedIsDefault()) {
-    libraryNameSuggestedAccept()
+    libraryNameSuggestedAccept();
   } else {
-    libraryNameCreate()
+    libraryNameCreate();
   }
 } else {
   // This is being run in a CI environment, so don't ask any questions
-  setupLibrary(libraryNameSuggested())
+  setupLibrary(libraryNameSuggested());
 }
 
 /**
@@ -76,14 +76,14 @@ if (process.env.CI == null) {
 function libraryNameCreate() {
   _prompt.get(_promptSchemaLibraryName, (err: any, res: any) => {
     if (err) {
-      console.log(colors.red('Sorry, there was an error building the workspace :('))
-      removeItems()
-      process.exit(1)
-      return
+      console.log(colors.red('Sorry, there was an error building the workspace :('));
+      removeItems();
+      process.exit(1);
+      return;
     }
 
-    setupLibrary(res.library)
-  })
+    setupLibrary(res.library);
+  });
 }
 
 /**
@@ -93,16 +93,16 @@ function libraryNameCreate() {
 function libraryNameSuggestedAccept() {
   _prompt.get(_promptSchemaLibrarySuggest, (err: any, res: any) => {
     if (err) {
-      console.log(colors.red("Sorry, you'll need to type the library name"))
-      libraryNameCreate()
+      console.log(colors.red("Sorry, you'll need to type the library name"));
+      libraryNameCreate();
     }
 
     if (res.useSuggestedName.toLowerCase().charAt(0) === 'y') {
-      setupLibrary(libraryNameSuggested())
+      setupLibrary(libraryNameSuggested());
     } else {
-      libraryNameCreate()
+      libraryNameCreate();
     }
-  })
+  });
 }
 
 /**
@@ -119,7 +119,7 @@ function libraryNameSuggested() {
     .basename(path.resolve(__dirname, '..'))
     .replace(/[^\w\d]|_/g, '-')
     .replace(/^-+|-+$/g, '')
-    .toLowerCase()
+    .toLowerCase();
 }
 
 /**
@@ -127,10 +127,10 @@ function libraryNameSuggested() {
  */
 function libraryNameSuggestedIsDefault() {
   if (libraryNameSuggested() === 'library-starter') {
-    return true
+    return true;
   }
 
-  return false
+  return false;
 }
 
 /**
@@ -139,29 +139,29 @@ function libraryNameSuggestedIsDefault() {
  * @param libraryName
  */
 function setupLibrary(libraryName: string) {
-  console.log(colors.cyan('\nInitializing...\n'))
+  console.log(colors.cyan('\nInitializing...\n'));
 
   // Get the Git username and email before the .git directory is removed
-  const username = exec('git config user.name', { silent: true }).stdout.trim()
-  const usermail = exec('git config user.email', { silent: true }).stdout.trim()
+  const username = exec('git config user.name', { silent: true }).stdout.trim();
+  const usermail = exec('git config user.email', { silent: true }).stdout.trim();
 
-  removeItems()
+  removeItems();
 
-  modifyContents(libraryName, username, usermail)
+  modifyContents(libraryName, username, usermail);
 
-  renameItems(libraryName)
+  renameItems(libraryName);
 
-  finalize()
+  finalize();
 
-  console.log(colors.green('Success! The library initialization is complete.\n'))
-  console.log('Inside that directory, you can run several commands:\n')
+  console.log(colors.green('Success! The library initialization is complete.\n'));
+  console.log('Inside that directory, you can run several commands:\n');
 
-  console.log(colors.cyan('  yarn start'))
-  console.log('    Starts the development compiler.\n')
-  console.log(colors.cyan('  yarn test'))
-  console.log('    Starts the jest runner.\n')
-  console.log(colors.cyan('  yarn build'))
-  console.log('    Bundles the library for production.\n')
+  console.log(colors.cyan('  yarn start'));
+  console.log('    Starts the development compiler.\n');
+  console.log(colors.cyan('  yarn test'));
+  console.log('    Starts the jest runner.\n');
+  console.log(colors.cyan('  yarn build'));
+  console.log('    Bundles the library for production.\n');
 }
 
 /**
@@ -170,11 +170,11 @@ function setupLibrary(libraryName: string) {
 function removeItems() {
   // The directories and files are combined here, to simplify the function,
   // as the 'rm' command checks the item type before attempting to remove it
-  const rmItems = rmDirs.concat(rmFiles)
+  const rmItems = rmDirs.concat(rmFiles);
   rm(
     '-rf',
     rmItems.map(f => path.resolve(__dirname, '..', f))
-  )
+  );
 }
 
 /**
@@ -185,15 +185,15 @@ function removeItems() {
  * @param usermail
  */
 function modifyContents(libraryName: string, username: string, usermail: string) {
-  const files = modifyFiles.map(f => path.resolve(__dirname, '..', f))
+  const files = modifyFiles.map(f => path.resolve(__dirname, '..', f));
   try {
     replace.sync({
       files,
       from: [/--libraryname--/g, /--username--/g, /--usermail--/g],
       to: [libraryName, username, usermail],
-    })
+    });
   } catch (error) {
-    console.error('An error occurred modifying the file: ', error)
+    console.error('An error occurred modifying the file: ', error);
   }
 }
 
@@ -206,9 +206,9 @@ function renameItems(libraryName: string) {
   renameFiles.forEach(function (files) {
     // Files[0] is the current filename
     // Files[1] is the new name
-    const newFilename = files[1].replace(/--libraryname--/g, libraryName)
-    mv(path.resolve(__dirname, '..', files[0]), path.resolve(__dirname, '..', newFilename))
-  })
+    const newFilename = files[1].replace(/--libraryname--/g, libraryName);
+    mv(path.resolve(__dirname, '..', files[0]), path.resolve(__dirname, '..', newFilename));
+  });
 }
 
 /**
@@ -218,19 +218,19 @@ function finalize() {
   // Recreate Git folder
   exec('git init "' + path.resolve(__dirname, '..') + '"', {
     silent: true,
-  }).stdout
+  }).stdout;
 
   // Remove post-install command
-  const jsonPackage = path.resolve(__dirname, '..', 'package.json')
-  const pkg = JSON.parse(readFileSync(jsonPackage) as any)
-  const readme = path.resolve(__dirname, '..', 'README.md')
+  const jsonPackage = path.resolve(__dirname, '..', 'package.json');
+  const pkg = JSON.parse(readFileSync(jsonPackage) as any);
+  const readme = path.resolve(__dirname, '..', 'README.md');
 
   // Note: Add items to remove from the package file here
-  delete pkg.scripts.postinstall
+  delete pkg.scripts.postinstall;
 
-  writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2))
-  writeFileSync(readme, `# ${pkg.name}`)
+  writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2));
+  writeFileSync(readme, `# ${pkg.name}`);
 
   // Initialize Husky
-  fork(path.resolve(__dirname, '..', 'node_modules', 'husky', 'bin', 'install'), { silent: true })
+  fork(path.resolve(__dirname, '..', 'node_modules', 'husky', 'bin', 'install'), { silent: true });
 }

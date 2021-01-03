@@ -36,4 +36,4 @@ module.exports = {
     'babel-plugin-transform-es3-modules-literals',
     'babel-plugin-transform-es3-member-expression-literals',
   ],
-}
+};

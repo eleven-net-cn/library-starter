@@ -1,5 +1,5 @@
 function func() {
-  console.log('Hello World')
+  console.log('Hello World');
 }
 
-export default func
+export default func;

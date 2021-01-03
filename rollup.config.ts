@@ -1,22 +1,22 @@
-import path from 'path'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import sourceMaps from 'rollup-plugin-sourcemaps'
-import babel from '@rollup/plugin-babel'
-import { DEFAULT_EXTENSIONS } from '@babel/core'
-import alias from '@rollup/plugin-alias'
-import json from '@rollup/plugin-json'
-import peerDepsExternal from 'rollup-plugin-peer-deps-external'
-import { terser } from 'rollup-plugin-terser'
+import path from 'path';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import sourceMaps from 'rollup-plugin-sourcemaps';
+import babel from '@rollup/plugin-babel';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
+import alias from '@rollup/plugin-alias';
+import json from '@rollup/plugin-json';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import { terser } from 'rollup-plugin-terser';
 // import banner from 'rollup-plugin-banner'
-import filesize from 'rollup-plugin-filesize'
-import camelCase from 'lodash.camelcase'
-import cleaner from 'rollup-plugin-cleaner'
-import eslint from '@rbnlffl/rollup-plugin-eslint'
-import pkg from './package.json'
+import filesize from 'rollup-plugin-filesize';
+import camelCase from 'lodash.camelcase';
+import cleaner from 'rollup-plugin-cleaner';
+import eslint from '@rbnlffl/rollup-plugin-eslint';
+import pkg from './package.json';
 
-const libraryName = '--libraryname--'
-const isProd = process.env.NODE_ENV === 'production'
+const libraryName = '--libraryname--';
+const isProd = process.env.NODE_ENV === 'production';
 
 const pluginsProd = isProd
   ? [
@@ -43,7 +43,7 @@ const pluginsProd = isProd
         targets: ['./dist/'],
       }),
     ]
-  : []
+  : [];
 
 export default {
   input: `src/${libraryName}.ts`,
@@ -92,4 +92,4 @@ export default {
     }),
     ...pluginsProd,
   ],
-}
+};
