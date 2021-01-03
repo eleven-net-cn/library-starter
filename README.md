@@ -35,6 +35,7 @@ yarn test           # 启动 Jest 测试 & 查看测试覆盖率 & 类型检查�
 yarn build          # 打包 & 类型检查 & 生成声明文件 & 生成 docs 文档
 yarn docs           # 生成文档 By TypeDoc
 
+yarn commit         # 交互式书写 commit message
 yarn lint           # 运行 eslint，查看 lint 提示
 yarn lint:fix       # 运行 eslint & 自动 fix 代码
 ```
