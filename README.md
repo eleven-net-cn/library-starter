@@ -10,22 +10,25 @@ Typescript 工具类库快速启动工具
 
 ## Usage
 
-1. clone 仓库代码
+> 执行以下两步操作，即可快速完成类库工具搭建。
+
+1. `clone`
 
    ```sh
-   # YOUR_PROJECT_FOLDER_NAME 是你的项目目录名，建议明确指定。
+   # YOUR_PROJECT_FOLDER_NAME 是你的项目目录名
    git clone https://github.com/eleven-net-cn/library-starter.git YOUR_PROJECT_FOLDER_NAME
 
    cd YOUR_PROJECT_FOLDER_NAME
    ```
 
-2. 安装依赖包 & 命名 library
-
-   > 该 library 名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量。例如：library 名称为 my-lib，默认情况下，UMD 模块挂载的全局变量是 `window.myLib`、`global.myLib`。
+2. `install`
 
    ```sh
    yarn / yarn install
    ```
+
+   > `install` 安装完包以后，会提示输入 library 名称，该 library 名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量。  
+   > 例如：library 名称为 my-lib，默认情况下，UMD 模块挂载的全局变量是 `window.myLib`、`global.myLib`。
 
 ## Command
 
