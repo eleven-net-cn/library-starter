@@ -67,7 +67,8 @@ export default {
   },
   plugins: [
     /**
-     * 不需要打包的第三方依赖，在 peerDependencies 中声明，将自动添加到 externnal 不参与打包。
+     * 不需要打包的第三方依赖，
+     * 请在 package.json 添加到 peerDependencies 中，将自动添加到 external 不参与打包。
      */
     peerDepsExternal(),
     commonjs(),
