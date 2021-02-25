@@ -28,6 +28,10 @@
     "lint": "eslint . --ext .js,.ts",
     "lint:fix": "eslint . --ext .js,.ts --fix",
     "commit": "git-cz",
+    "release": "standard-version",
+    "release:patch": "standard-version --releaseAs patch",
+    "release:minor": "standard-version --releaseAs minor",
+    "release:major": "standard-version --releaseAs major",
     "postinstall": "ts-node tools/init"
   },
   "husky": {
@@ -109,6 +113,7 @@
     "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-terser": "^6.1.0",
     "shelljs": "^0.8.4",
+    "standard-version": "^9.1.1",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.1",
