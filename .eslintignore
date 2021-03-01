@@ -5,3 +5,5 @@
 /demo
 /dist
 /docs
+
+.eslintrc.js

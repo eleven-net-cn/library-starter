@@ -1,5 +1,3 @@
-function func() {
-  console.log('Hello World');
-}
+function func() {}
 
 export default func;

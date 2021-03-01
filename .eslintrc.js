@@ -3,6 +3,7 @@
  */
 
 module.exports = {
+  root: true,
   extends: [
     // https://github.com/umijs/fabric
     require.resolve('@umijs/fabric/dist/eslint'),
