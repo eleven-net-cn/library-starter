@@ -67,10 +67,11 @@ export default {
   },
   plugins: [
     /**
-     * 不需要打包的第三方依赖，
-     * 请在 package.json 添加到 peerDependencies 中，将自动添加到 external 不参与打包。
+     * dependencies、peerDependencies 依赖都将被加入到 externals 中
      */
-    peerDepsExternal(),
+    peerDepsExternal({
+      includeDependencies: true,
+    }),
     commonjs(),
     nodeResolve({
       extensions: [...DEFAULT_EXTENSIONS, '.ts', '.json'],
