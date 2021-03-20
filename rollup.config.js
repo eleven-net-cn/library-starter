@@ -94,9 +94,6 @@ export default [
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          'react-dnd': 'ReactDnD',
-          antd: 'antd',
-          'styled-components': 'styled',
         },
         sourcemap: true,
       },

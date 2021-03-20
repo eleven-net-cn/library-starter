@@ -13,7 +13,12 @@ const { fork } = require('child_process');
 // Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools'];
 const rmFiles = ['.gitattributes', 'tools/init.ts', 'install.gif'];
-const modifyFiles = ['package.json', 'rollup.config.ts', 'test/library.test.ts'];
+const modifyFiles = [
+  'package.json',
+  'rollup.config.js',
+  'rollup.config.ts',
+  'test/library.test.ts',
+];
 const renameFiles = [
   ['src/library.ts', 'src/--libraryname--.ts'],
   ['test/library.test.ts', 'test/--libraryname--.test.ts'],
