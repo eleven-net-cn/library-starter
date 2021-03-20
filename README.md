@@ -26,8 +26,8 @@ Typescript 类库快速启动工具
    yarn / yarn install
    ```
 
-   > `install` 安装完包以后，会提示输入 library 名称，该 library 名称会被处理成小驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量。  
-   > 例如：library 名称为 my-lib，默认情况下，UMD 模块挂载的全局变量是 `window.myLib`、`global.myLib`。
+   > `install` 安装完包以后，会提示输入 library 名称，该 library 名称会被处理成大驼峰变量，作为 UMD 模块挂载到 window、global 的全局变量。  
+   > 例如：library 名称为 my-lib，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
 
 ## Command
 

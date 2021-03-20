@@ -1,7 +1,6 @@
 import path from 'path';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import sourceMaps from 'rollup-plugin-sourcemaps';
 import babel from '@rollup/plugin-babel';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
 import alias from '@rollup/plugin-alias';
@@ -16,6 +15,11 @@ import pkg from './package.json';
 
 const libraryName = '--libraryname--';
 const isProd = process.env.NODE_ENV === 'production';
+
+const toBigCamelCase = str => {
+  const camelStr = camelCase(str);
+  return `${camelStr.charAt(0).toUpperCase()}${camelStr.substring(1)}`;
+};
 
 const plugins = [
   commonjs(),
@@ -38,10 +42,6 @@ const plugins = [
     filterInclude: ['src/**'],
     filterExclude: ['node_modules/**'],
   }),
-  isProd &&
-    cleaner({
-      targets: ['./dist/'],
-    }),
   isProd && filesize(),
 ].filter(Boolean);
 
@@ -52,11 +52,13 @@ export default [
       {
         file: pkg.main,
         format: 'cjs',
+        exports: 'named',
         sourcemap: true,
       },
       {
         file: pkg.module,
         format: 'es',
+        exports: 'named',
         sourcemap: true,
       },
     ],
@@ -64,6 +66,10 @@ export default [
       include: 'src/**',
     },
     plugins: [
+      isProd &&
+        cleaner({
+          targets: ['./dist/'],
+        }),
       ...plugins,
       /**
        * cjs、es 模块，第三方依赖不编译到产物中
@@ -79,10 +85,10 @@ export default [
     input: `src/${libraryName}.ts`,
     output: [
       {
-        file: pkg.main,
+        file: pkg.unpkg,
         format: 'umd',
         exports: 'named',
-        name: camelCase(libraryName),
+        name: toBigCamelCase(libraryName),
         // 不想要打包到产物的第三方依赖，在此处声明外部引入时的全局对象名
         // https://www.rollupjs.org/guide/en/#outputglobals
         globals: {
@@ -93,7 +99,6 @@ export default [
           'styled-components': 'styled',
         },
         sourcemap: true,
-        banner: '/* my-library version */',
       },
     ],
     watch: {
@@ -102,7 +107,7 @@ export default [
     plugins: [
       ...plugins,
       /**
-       * umd 模块，仅将 peerDependencies 加入到 externals 中（dependencies 中的依赖将被编译到产物中）
+       * umd 模块，仅将 peerDependencies 加入到 externals 中（dependencies 依赖将被编译到产物中）
        * https://github.com/pmowrer/rollup-plugin-peer-deps-external#readme
        *
        * 因此你需要：
