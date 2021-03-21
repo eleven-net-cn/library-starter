@@ -1,11 +1,11 @@
 # [library-starter](https://github.com/eleven-net-cn/library-starter)
 
-自动生成 TypeScript 类库、SDK 开发的初始化代码，提供 rollup 编译等必备配置。
+自动生成 TypeScript 类库、SDK 开发环境，提供 rollup、babel、jest、eslint 等配置。
 
 提供以下特性：
 
 - Babel 编译 TypeScript 代码，tsc 代码检查、生成声明文件等
-- Jest 单元测试，使用 ts-jest 转换测试代码、`test` 目录的 Typescript 代码检查
+- Jest 单元测试，使用 ts-jest 转换测试代码、`test` 目录的 TypeScript 代码检查
 - 提供 `demo` 测试目录，parcel 转换运行相关测试代码
 - 保持统一的代码规范，commit 提交时自动格式化代码（eslint、prettier、lint-staged）
 - 强制规范 `git commit` 提交（commitlint、commitizen）
@@ -22,8 +22,8 @@ git clone https://github.com/eleven-net-cn/library-starter.git
 yarn install
 ```
 
-> `install` 安装完包以后，会提示输入 `library` 名称，该 `library` 名称会被处理成小驼峰变量，作为 `UMD` 模块挂载到 window、global 的全局变量。  
-> 例如：`library` 名称为 `my-lib`，默认情况下，`UMD` 模块挂载的全局变量是 `window.myLib`、`global.myLib`。
+> `install` 安装依赖结束后，会自动提示输入 `library` 名称，该 `library` 名称会被处理成大驼峰变量，作为 `UMD` 模块挂载到 window、global 的全局变量。  
+> 例如：`library` 名称为 `my-lib`，默认情况下，`UMD` 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
 
 ## Command
 
