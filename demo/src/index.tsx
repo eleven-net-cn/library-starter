@@ -7,7 +7,7 @@ if ((module as any)?.hot) {
 }
 
 const App = () => {
-  <div>Write demo here...</div>;
+  return <div>Write demo here...</div>;
 };
 
 render(<App />, document.getElementById('root'));
