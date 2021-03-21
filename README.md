@@ -2,13 +2,14 @@
 
 自动生成 TypeScript 类库、SDK 开发环境，提供 rollup、babel、jest、eslint 等配置。
 
-提供以下特性：
+主要特性：
 
 - Babel 编译 TypeScript 代码，tsc 代码检查、生成声明文件等
 - Jest 单元测试，使用 ts-jest 转换测试代码、`test` 目录的 TypeScript 代码检查
 - 提供 `demo` 测试目录，parcel 转换运行相关测试代码
 - 保持统一的代码规范，commit 提交时自动格式化代码（eslint、prettier、lint-staged）
 - 强制规范 `git commit` 提交（commitlint、commitizen）
+- 提供 standard-version，自动生成 version、CHANGELOG.md
 
 ## Usage
 
