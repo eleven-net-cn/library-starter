@@ -4,12 +4,12 @@
 
 主要特性：
 
-- Babel 编译 TypeScript 代码，tsc 代码检查、生成声明文件等
-- Jest 单元测试，使用 ts-jest 转换测试代码、`test` 目录的 TypeScript 代码检查
-- 提供 `demo` 测试目录，parcel 转换运行相关测试代码
+- Babel 编译 TypeScript 代码，`tsc` 代码检查、生成声明文件等
+- Jest 单元测试，使用 ts-jest 转换测试代码、test 目录的 TypeScript 代码检查
+- Vite 运行 Demo 测试代码
+- `standard-version` 自动添加 version、changelog
 - 保持统一的代码规范，commit 提交时自动格式化代码（eslint、prettier、lint-staged）
 - 强制规范 `git commit` 提交（commitlint、commitizen）
-- 提供 standard-version，自动添加 version、changelog
 
 ## Usage
 
@@ -30,7 +30,7 @@ yarn install
 ```sh
 yarn start          # 本地调试 & tsc 类型检查（src 目录）
 yarn build          # 打包 & 类型检查 & 生成声明文件
-yarn demo           # 运行 demo 测试
+yarn demo           # 运行 demo 测试（vite）
 yarn test           # 启动 Jest 测试 & 查看测试覆盖率 & 类型检查（test 目录）
 
 yarn release            # 根据 commit 提交，自动升级 version、生成 CHANGELOG.md

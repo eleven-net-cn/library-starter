@@ -1,12 +1,13 @@
-import React from 'react';
+import '@eleven.fe/reset.css';
+import React, { useEffect } from 'react';
 import { render } from 'react-dom';
-
-// parcel hot module replacement
-if ((module as any)?.hot) {
-  (module as any)?.hot?.accept();
-}
+// import func from '../../src/library';
 
 const App = () => {
+  // useEffect(() => {
+  //   func();
+  // }, []);
+
   return <div>Write demo here...</div>;
 };
 
