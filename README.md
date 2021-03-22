@@ -42,3 +42,17 @@ yarn commit         # 交互式书写 commit message
 yarn lint           # 运行 eslint，查看 lint 提示
 yarn lint:fix       # 运行 eslint & 自动 fix 代码
 ```
+
+## Remark
+
+1. 输出 `cjs`、`esm` 模块时，`dependencies`、`peerDependencies` 中的依赖包，都会自动被加入到 rollup 的 externals 中，最终不会打包到 `dist` 产物中。
+
+2. 输出 `umd` 模块时，仅 `peerDependencies` 中的依赖包会被自动加入到 rollup 的 externals 中。
+
+   记得在 `rollup.config.js` 文件中，修改输出 `umd` 模块的 `globals` 配置，添加该依赖包外部引入的全局对象名。
+
+3. 类库代码中使用到的新 ES API（例如：`includes()`、`padStart()` 等新 API），会自动从 `@babel/runtime-corejs3` 引入对应 api 的 polyfill，你无需额外担心这些兼容问题。
+
+   输出 `umd` 模块时，polyfill 会自动被编译到 `dist` 产物中。
+
+   而输出 `cjs`、`esm` 模块时不会编译到 `dist`，`@babel/runtime-corejs3` 仅仅作为 `dependencies` 依赖被默认安装，自动引入对应的 polyfill。
