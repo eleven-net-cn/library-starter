@@ -1,6 +1,6 @@
 # [library-starter](https://github.com/eleven-net-cn/library-starter)
 
-自动生成 TypeScript 类库、SDK 开发环境，提供 rollup、babel、jest、eslint 等配置。
+自动生成 TypeScript 类库、SDK 开发环境，提供 rollup、babel、jest、eslint 等配置，支持打包输出 commonjs、es module 和 umd 模块格式代码。
 
 主要特性：
 
