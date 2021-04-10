@@ -21,7 +21,7 @@
     git clone https://github.com/eleven-net-cn/library-starter.git my-lib
     ```
 
-    ![create_library.gif](http://assets.eleven.net.cn/images/create_library.gif)
+    ![clone_repo.gif](https://static.eleven.net.cn/images/library/clone_repo.gif)
 
 2. 安装依赖，并根据提示输入、确认 UMD 模块全局对象名称
 
@@ -29,7 +29,7 @@
     yarn install
     ```
 
-    ![set_library_name.gif](http://assets.eleven.net.cn/images/set_library_name.gif)
+    ![set_library_name.gif](https://static.eleven.net.cn/images/library/install_init.gif)
 
 
     > `yarn install` 安装依赖结束后，会自动提示输入 library 名称。<br/>UMD 模块会将名称转换为大驼峰，在 `window`、`global` 全局挂载。例如：library 名称为 `my-lib`，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
