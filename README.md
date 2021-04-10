@@ -13,9 +13,9 @@
 
 ## Usage
 
-执行以下两步操作，即可快速完成初始化。
+执行以下两步操作，即可快速创建项目，并完成初始化。
 
-1. clone repository
+1. clone repository，创建项目
 
     推荐确定好项目文件夹名称，示例：my-lib。
 
@@ -25,7 +25,7 @@
 
     ![clone_repo.gif](https://static.eleven.net.cn/images/library/clone_repo.gif)
 
-2. 安装依赖
+2. 安装依赖，完成项目初始化
 
     依赖安装结束后，将触发 npm 的 `postinstall` 钩子，自动运行初始化脚本。请根据提示输入或确认 library name，随后将自动完成项目全部初始化工作。
 
