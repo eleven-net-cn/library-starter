@@ -13,9 +13,11 @@
 
 ## Usage
 
-执行以下两步操作，快速完成初始化。
+执行以下两步操作，即可快速完成初始化。
 
-1. clone repository（推荐确定好项目文件夹名称，示例：my-lib）
+1. clone repository
+
+    推荐确定好项目文件夹名称，示例：my-lib。
 
     ```zsh
     git clone https://github.com/eleven-net-cn/library-starter.git my-lib
@@ -23,7 +25,9 @@
 
     ![clone_repo.gif](https://static.eleven.net.cn/images/library/clone_repo.gif)
 
-2. 安装依赖，并根据提示输入、确认 UMD 模块全局对象名称
+2. 安装依赖
+
+    依赖安装结束后，会自动运行初始化脚本，请根据提示输入或确认 UMD 模块全局对象名称。
 
     ```zsh
     yarn install
@@ -32,7 +36,7 @@
     ![set_library_name.gif](https://static.eleven.net.cn/images/library/install_init.gif)
 
 
-    > `yarn install` 安装依赖结束后，会自动提示输入 library 名称。<br/>UMD 模块会将名称转换为大驼峰，在 `window`、`global` 全局挂载。例如：library 名称为 `my-lib`，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
+    > UMD 模块会将名称转换为大驼峰，在 `window`、`global` 全局挂载。例如：library 名称为 `my-lib`，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
 
 ## Command
 
