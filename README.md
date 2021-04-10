@@ -27,7 +27,7 @@
 
 2. 安装依赖
 
-    依赖安装结束后，将触发 npm 的 `postinstall` 钩子，自动运行初始化脚本，请根据提示输入或确认 UMD 模块全局对象名称，随后将自动完成项目全部初始化工作。
+    依赖安装结束后，将触发 npm 的 `postinstall` 钩子，自动运行初始化脚本。请根据提示输入或确认 library name，随后将自动完成项目全部初始化工作。
 
     ```zsh
     yarn install
@@ -36,7 +36,7 @@
     ![set_library_name.gif](https://static.eleven.net.cn/images/library/install_init.gif)
 
 
-    > UMD 模块会将名称转换为大驼峰，在 `window`、`global` 全局挂载。例如：library 名称为 `my-lib`，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
+    > UMD 模块会将 library name 转换为大驼峰，在 `window`、`global` 全局挂载。例如：library 名称为 `my-lib`，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
 
 ## Command
 
