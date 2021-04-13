@@ -34,7 +34,10 @@ const plugins = [
   }),
   json(),
   replace({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    values: {
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    },
+    preventAssignment: true,
   }),
   babel({
     babelHelpers: 'runtime',
