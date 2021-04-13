@@ -8,6 +8,7 @@ import json from '@rollup/plugin-json';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
+import replace from '@rollup/plugin-replace';
 import camelCase from 'lodash.camelcase';
 import cleaner from 'rollup-plugin-cleaner';
 import eslint from '@rbnlffl/rollup-plugin-eslint';
@@ -32,6 +33,9 @@ const plugins = [
     },
   }),
   json(),
+  replace({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  }),
   babel({
     babelHelpers: 'runtime',
     extensions: [...DEFAULT_EXTENSIONS, '.ts'],
