@@ -24,8 +24,8 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "start": "concurrently \"rollup -c rollup.config.js --environment NODE_ENV:development -w\" \"tsc -p tsconfig.spec.json -w\" -k",
-    "build": "concurrently \"rollup -c rollup.config.js --environment NODE_ENV:production\" \"tsc\" -k",
+    "start": "concurrently \"rollup -c rollup.config.js --environment NODE_ENV:development -w\" \"tsc -p tsconfig.spec.json -w\"",
+    "build": "concurrently \"rollup -c rollup.config.js --environment NODE_ENV:production\" \"tsc\"",
     "test": "jest --coverage --watchAll",
     "demo": "cd demo && yarn start",
     "prepublishOnly": "npm run build",
