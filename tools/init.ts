@@ -43,7 +43,7 @@ function libraryNameCreate() {
       {
         type: 'input',
         name: 'libraryName',
-        message: `请确认 library name（小写字母、中划线连接）：`,
+        message: colors.cyan(`请确认 library name（小写字母、中划线连接）：`),
         default: libraryNameSuggested(),
         validate(libraryName: string) {
           // 校验版本号的格式

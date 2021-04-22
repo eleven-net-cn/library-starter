@@ -36,8 +36,7 @@
     "release:patch": "standard-version --releaseAs patch",
     "release:minor": "standard-version --releaseAs minor",
     "release:major": "standard-version --releaseAs major",
-    "postinstall": "ts-node tools/init",
-    "te": "ts-node tools/init"
+    "postinstall": "ts-node tools/init"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
