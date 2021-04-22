@@ -36,7 +36,8 @@
     "release:patch": "standard-version --releaseAs patch",
     "release:minor": "standard-version --releaseAs minor",
     "release:major": "standard-version --releaseAs major",
-    "postinstall": "ts-node tools/init"
+    "postinstall": "ts-node tools/init",
+    "te": "ts-node tools/init"
   },
   "gitHooks": {
     "pre-commit": "lint-staged",
@@ -96,12 +97,12 @@
     "cross-env": "^7.0.2",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.21.0",
+    "inquirer": "^8.0.0",
     "jest": "^26.4.2",
     "jest-config": "^26.4.2",
     "lint-staged": "^10.3.0",
     "lodash.camelcase": "^4.3.0",
     "prettier": "^2.2.1",
-    "prompt": "^1.0.0",
     "replace-in-file": "^6.1.0",
     "rollup": "^2.34.2",
     "rollup-plugin-cleaner": "^1.0.0",

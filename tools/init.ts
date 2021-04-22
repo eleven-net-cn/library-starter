@@ -1,8 +1,5 @@
 /* eslint-disable */
-/**
- * This script runs automatically after your first npm-install.
- */
-const _prompt = require('prompt');
+const inquirer = require('inquirer');
 const { mv, rm, which, exec } = require('shelljs');
 const replace = require('replace-in-file');
 const colors = require('colors');
@@ -10,9 +7,8 @@ const path = require('path');
 const { readFileSync, writeFileSync } = require('fs');
 const { fork } = require('child_process');
 
-// Note: These should all be relative to the project root directory
 const rmDirs = ['.git', 'tools'];
-const rmFiles = ['.gitattributes', 'tools/init.ts', 'install.gif'];
+const rmFiles = ['.gitattributes', 'tools/init.ts'];
 const modifyFiles = [
   'package.json',
   'rollup.config.js',
@@ -23,35 +19,6 @@ const renameFiles = [
   ['src/library.ts', 'src/--libraryname--.ts'],
   ['test/library.test.ts', 'test/--libraryname--.test.ts'],
 ];
-
-const _promptSchemaLibraryName = {
-  properties: {
-    library: {
-      description: colors.cyan('What do you want the library to be called? (use kebab-case)'),
-      pattern: /^[a-z]+(\-[a-z]+)*$/,
-      type: 'string',
-      required: true,
-      message: '"kebab-case" uses lowercase letters, and hyphens for any punctuation',
-    },
-  },
-};
-
-const _promptSchemaLibrarySuggest = {
-  properties: {
-    useSuggestedName: {
-      description: colors.cyan(
-        'Would you like it to be called "' + libraryNameSuggested() + '"? [Yes/No/y/n]'
-      ),
-      pattern: /^(y(es)?|n(o)?)$/i,
-      type: 'string',
-      required: true,
-      message: 'You need to type "Yes/No/y/n" to continue...',
-    },
-  },
-};
-
-_prompt.start();
-_prompt.message = '';
 
 // Clear console
 process.stdout.write('\x1B[2J\x1B[0f');
@@ -64,60 +31,42 @@ if (!which('git')) {
 
 // Generate the library name and start the tasks
 if (process.env.CI == null) {
-  if (!libraryNameSuggestedIsDefault()) {
-    libraryNameSuggestedAccept();
-  } else {
-    libraryNameCreate();
-  }
+  libraryNameCreate();
 } else {
   // This is being run in a CI environment, so don't ask any questions
   setupLibrary(libraryNameSuggested());
 }
 
-/**
- * Asks the user for the name of the library if it has been cloned into the
- * default directory, or if they want a different name to the one suggested
- */
 function libraryNameCreate() {
-  _prompt.get(_promptSchemaLibraryName, (err: any, res: any) => {
-    if (err) {
-      console.log(colors.red('Sorry, there was an error building the workspace :('));
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'libraryName',
+        message: `请确认 library name（小写字母、中划线连接）：`,
+        default: libraryNameSuggested(),
+        validate(libraryName: string) {
+          // 校验版本号的格式
+          if (!/^[a-z]+(\-[a-z]+)*$/.test(libraryName)) {
+            console.log(colors.red('格式错误，请使用小写字母、中划线连接'));
+            return false;
+          }
+          return true;
+        },
+      },
+    ])
+    .then(({ libraryName }: Record<'libraryName', string>) => {
+      setupLibrary(libraryName);
+    })
+    .catch(() => {
+      console.log(colors.red('library 初始化出错了~'));
       removeItems();
       process.exit(1);
-      return;
-    }
-
-    setupLibrary(res.library);
-  });
+    });
 }
 
 /**
- * Sees if the users wants to accept the suggested library name if the project
- * has been cloned into a custom directory (i.e. it's not 'typescript-library-starter')
- */
-function libraryNameSuggestedAccept() {
-  _prompt.get(_promptSchemaLibrarySuggest, (err: any, res: any) => {
-    if (err) {
-      console.log(colors.red("Sorry, you'll need to type the library name"));
-      libraryNameCreate();
-    }
-
-    if (res.useSuggestedName.toLowerCase().charAt(0) === 'y') {
-      setupLibrary(libraryNameSuggested());
-    } else {
-      libraryNameCreate();
-    }
-  });
-}
-
-/**
- * The library name is suggested by looking at the directory name of the
- * tools parent directory and converting it to kebab-case
- *
- * The regex for this looks for any non-word or non-digit character, or
- * an underscore (as it's a word character), and replaces it with a dash.
- * Any leading or trailing dashes are then removed, before the string is
- * lowercased and returned
+ * 默认取 project dir 名称作为 library name
  */
 function libraryNameSuggested() {
   return path
@@ -125,17 +74,6 @@ function libraryNameSuggested() {
     .replace(/[^\w\d]|_/g, '-')
     .replace(/^-+|-+$/g, '')
     .toLowerCase();
-}
-
-/**
- * Checks if the suggested library name is the default, which is 'typescript-library-starter'
- */
-function libraryNameSuggestedIsDefault() {
-  if (libraryNameSuggested() === 'library-starter') {
-    return true;
-  }
-
-  return false;
 }
 
 /**
