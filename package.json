@@ -24,10 +24,10 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "start": "concurrently \"rollup -c rollup.config.js --environment NODE_ENV:development -w\" \"tsc -p tsconfig.spec.json -w\" -n rollup,tsc -k",
-    "build": "concurrently \"rollup -c rollup.config.js --environment NODE_ENV:production\" \"tsc\" -n rollup,tsc -k",
-    "demo": "cd demo && yarn start",
+    "start": "concurrently \"rollup -c rollup.config.js --environment NODE_ENV:development -w\" \"tsc -p tsconfig.spec.json -w\"",
+    "build": "concurrently \"rollup -c rollup.config.js --environment NODE_ENV:production\" \"tsc\"",
     "test": "jest --coverage --watchAll",
+    "demo": "cd demo && yarn start",
     "prepublishOnly": "npm run build",
     "lint": "eslint \"src/**/*.{js?(x),ts?(x)}\"",
     "lint:fix": "eslint \"src/**/*.{js?(x),ts?(x)}\" --fix",
