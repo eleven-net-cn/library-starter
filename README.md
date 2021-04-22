@@ -33,7 +33,7 @@
     yarn install
     ```
 
-    ![set_library_name.gif](https://static.eleven.net.cn/images/library/install_init.gif)
+    ![set_library_name.gif](https://static.eleven.net.cn/images/library/install_init.gif?v=1619061818612)
 
 
     > UMD 模块会将 library name 转换为大驼峰，在 `window`、`global` 全局挂载。例如：library 名称为 `my-lib`，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
