@@ -17,26 +17,25 @@
 
 1. clone repository，创建项目
 
-    推荐确定好项目文件夹名称，示例：my-lib。
+   推荐确定好项目文件夹名称，示例：my-lib。
 
-    ```zsh
-    git clone https://github.com/eleven-net-cn/library-starter.git my-lib
-    ```
+   ```zsh
+   git clone https://github.com/eleven-net-cn/library-starter.git my-lib
+   ```
 
-    ![clone_repo.gif](https://static.eleven.net.cn/images/library/clone_repo.gif)
+   ![clone_repo.gif](https://static.eleven.net.cn/images/library/clone_repo.gif)
 
 2. 安装依赖，完成项目初始化
 
-    依赖安装结束后，将触发 npm 的 `postinstall` 钩子，自动运行初始化脚本。请根据提示输入或确认 library name，随后将自动完成项目全部初始化工作。
+   依赖安装结束后，将触发 npm 的 `postinstall` 钩子，自动运行初始化脚本。请根据提示输入或确认 library name，随后将自动完成项目全部初始化工作。
 
-    ```zsh
-    yarn install
-    ```
+   ```zsh
+   yarn install
+   ```
 
-    ![set_library_name.gif](https://static.eleven.net.cn/images/library/install_init.gif?v=1619061818612)
+   ![set_library_name.gif](https://static.eleven.net.cn/images/library/init.gif?v=1619061818612)
 
-
-    > UMD 模块会将 library name 转换为大驼峰，在 `window`、`global` 全局挂载。例如：library 名称为 `my-lib`，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
+   > UMD 模块会将 library name 转换为大驼峰，在 `window`、`global` 全局挂载。例如：library 名称为 `my-lib`，默认情况下，UMD 模块挂载的全局变量是 `window.MyLib`、`global.MyLib`。
 
 ## Command
 
@@ -71,10 +70,9 @@ yarn lint:fix       # 运行 eslint & 自动 fix 代码
    而输出 `cjs`、`esm` 模块时不会编译到 `dist`，`@babel/runtime-corejs3` 仅仅作为 `dependencies` 依赖被默认安装，自动按需引入 api polyfill。
 
    但是，如果你使用的第三方依赖包，自身未做好 api polyfill 兼容，你可以有以下选择：
-   
-     - 自己去弄清楚第三方依赖的兼容问题有哪些，从 [core-js](https://github.com/zloirock/core-js) 手动引入相关的 api polyfill。
-     
-     - 或者，去修改 babel 相关配置，将 `node_modules` 中的第三方依赖包加入到 babel 配置的 `include` 中，编译时一并处理。
 
-     - 或者，不做兼容，而是提醒使用方做好对应兼容。
+   - 自己去弄清楚第三方依赖的兼容问题有哪些，从 [core-js](https://github.com/zloirock/core-js) 手动引入相关的 api polyfill。
 
+   - 或者，去修改 babel 相关配置，将 `node_modules` 中的第三方依赖包加入到 babel 配置的 `include` 中，编译时一并处理。
+
+   - 或者，不做兼容，而是提醒使用方做好对应兼容。
