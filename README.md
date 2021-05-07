@@ -1,15 +1,20 @@
 # [library-starter](https://github.com/eleven-net-cn/library-starter)
 
-自动生成 TypeScript 类库、SDK 开发环境，提供 rollup、babel、jest、eslint 等配置，支持打包输出 commonjs、es module 和 umd 模块格式代码。
+自动生成 TypeScript 类库、SDK 开发环境，打包输出 commonjs、es module 和 umd 模块代码。
 
 主要特性：
 
-- Babel 编译 TypeScript 代码，`tsc` 代码检查、生成声明文件等
-- Jest 单元测试，使用 ts-jest 转换测试代码、test 目录的 TypeScript 代码检查
-- Vite 运行 Demo 测试代码
-- `standard-version` 自动添加 version、changelog
-- 保持统一的代码规范，commit 提交时自动格式化代码（eslint、prettier、lint-staged）
-- 强制规范 `git commit` 提交（commitlint、commitizen）
+- ✅ 提供 rollup 编译环境，输出 es module、commonjs 和 umd 模块代码
+  - Babel 编译 TypeScript 代码
+  - TSC 代码检查、生成声明文件
+- ✅ 提供 Jest 单元测试
+  - 使用 ts-jest 转换测试代码、test 目录的 TypeScript 代码检查
+- ✅ 提供 demo 测试目录
+  - Vite 运行 Demo 测试代码
+- ✅ 集成 `standard-version` 自动添加 version、changelog
+- ✅ 代码规范约束
+  - 集成 eslint、prettier，`commit` 提交时自动格式化代码（lint-staged）
+  - 强制规范 commit message（commitlint、commitizen）
 
 ## Usage
 
