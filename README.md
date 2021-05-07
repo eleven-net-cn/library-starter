@@ -1,6 +1,6 @@
 # [library-starter](https://github.com/eleven-net-cn/library-starter)
 
-自动生成 TypeScript 类库、SDK 开发环境，打包输出 commonjs、es module 和 umd 模块代码。
+快速生成 TypeScript 类库、SDK 开发环境
 
 主要特性：
 
@@ -9,8 +9,7 @@
   - TSC 代码检查、生成声明文件
 - ✅ 提供 Jest 单元测试
   - 使用 ts-jest 转换测试代码、test 目录的 TypeScript 代码检查
-- ✅ 提供 demo 测试目录
-  - Vite 运行 Demo 测试代码
+- ✅ 提供 demo 测试目录，vite 运行调试
 - ✅ 集成 `standard-version` 自动添加 version、changelog
 - ✅ 代码规范约束
   - 集成 eslint、prettier，`commit` 提交时自动格式化代码（lint-staged）
