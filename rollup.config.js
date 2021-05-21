@@ -17,7 +17,7 @@ import pkg from './package.json';
 const libraryName = '--libraryname--';
 const isProd = process.env.NODE_ENV === 'production';
 
-const toBigCamelCase = str => {
+const toPascalCase = str => {
   const camelStr = camelCase(str);
   return `${camelStr.charAt(0).toUpperCase()}${camelStr.substring(1)}`;
 };
@@ -95,7 +95,7 @@ export default [
         file: pkg.unpkg,
         format: 'umd',
         exports: 'named',
-        name: toBigCamelCase(libraryName),
+        name: toPascalCase(libraryName),
         // 不想要打包到产物的第三方依赖，在此处声明外部引入时的全局对象名
         // https://www.rollupjs.org/guide/en/#outputglobals
         globals: {
