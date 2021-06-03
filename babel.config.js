@@ -1,14 +1,4 @@
 module.exports = {
-  loaderOptions: {
-    /**
-     * Babel 编译时，会处理 core-js（未来可能会被修复），
-     * 导致 polyfill 内部代码发生了变化，产生一些微小的影响，如 Symbol 问题。
-     * 暂时我们手动声明略过。
-     * https://github.com/zloirock/core-js/issues/514
-     * https://github.com/rails/webpacker/pull/2031
-     */
-    exclude: [/node_modules[\\/]core-js/],
-  },
   assumptions: {
     /**
      * https://babeljs.io/docs/en/assumptions#setpublicclassfields
