@@ -42,7 +42,14 @@ const plugins = [
   babel({
     babelHelpers: 'runtime',
     extensions: [...DEFAULT_EXTENSIONS, '.ts'],
-    exclude: /node_modules/,
+    /**
+     * Babel 编译时，会处理 core-js（未来可能会被修复），
+     * 导致 polyfill 内部代码发生了变化，产生一些微小的影响，如 Symbol 问题。
+     * 暂时我们手动声明略过。
+     * https://github.com/zloirock/core-js/issues/514
+     * https://github.com/rails/webpacker/pull/2031
+     */
+    exclude: [/node_modules/, /node_modules[\\/]core-js/],
   }),
   eslint({
     extensions: ['.js', '.ts'],
