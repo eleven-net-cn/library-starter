@@ -9,18 +9,13 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import replace from '@rollup/plugin-replace';
-import camelCase from 'lodash.camelcase';
 import cleaner from 'rollup-plugin-cleaner';
 import eslint from '@rbnlffl/rollup-plugin-eslint';
+import camelcase from 'camelcase';
 import pkg from './package.json';
 
 const libraryName = '--libraryname--';
 const isProd = process.env.NODE_ENV === 'production';
-
-const toPascalCase = str => {
-  const camelStr = camelCase(str);
-  return `${camelStr.charAt(0).toUpperCase()}${camelStr.substring(1)}`;
-};
 
 const plugins = [
   commonjs(),
@@ -102,7 +97,7 @@ export default [
         file: pkg.unpkg,
         format: 'umd',
         exports: 'named',
-        name: toPascalCase(libraryName),
+        name: camelcase(libraryName, { pascalCase: true }),
         // 不想要打包到产物的第三方依赖，在此处声明外部引入时的全局对象名
         // https://www.rollupjs.org/guide/en/#outputglobals
         globals: {
