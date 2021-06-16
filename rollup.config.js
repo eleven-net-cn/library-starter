@@ -15,6 +15,7 @@ import camelcase from 'camelcase';
 import pkg from './package.json';
 
 const libraryName = '--libraryname--';
+const libraryNamePascalCase = camelcase(libraryName, { pascalCase: true });
 const isProd = process.env.NODE_ENV === 'production';
 
 const plugins = [
@@ -82,7 +83,7 @@ export default [
       ...plugins,
       /**
        * cjs、es 模块，第三方依赖不编译到产物中
-       * dependencies、peerDependencies 依赖都将被加入到 externals 中
+       * dependencies、peerDependencies 依赖都将被自动加入到 externals 中
        * https://github.com/pmowrer/rollup-plugin-peer-deps-external#readme
        */
       peerDepsExternal({
@@ -97,7 +98,7 @@ export default [
         file: pkg.unpkg,
         format: 'umd',
         exports: 'named',
-        name: camelcase(libraryName, { pascalCase: true }),
+        name: libraryNamePascalCase,
         // 不想要打包到产物的第三方依赖，在此处声明外部引入时的全局对象名
         // https://www.rollupjs.org/guide/en/#outputglobals
         globals: {
@@ -113,7 +114,7 @@ export default [
     plugins: [
       ...plugins,
       /**
-       * umd 模块，仅将 peerDependencies 加入到 externals 中（dependencies 依赖将被编译到产物中）
+       * umd 模块，仅将 peerDependencies 自动加入到 externals 中（dependencies 依赖将被编译到产物中）
        * https://github.com/pmowrer/rollup-plugin-peer-deps-external#readme
        *
        * 因此你需要：
