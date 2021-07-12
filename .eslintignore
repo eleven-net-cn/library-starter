@@ -7,3 +7,4 @@
 /docs
 
 .eslintrc.js
+rollup.config.js
