@@ -10,7 +10,7 @@ import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import replace from '@rollup/plugin-replace';
 import cleaner from 'rollup-plugin-cleaner';
-import eslint from '@rbnlffl/rollup-plugin-eslint';
+import eslint from '@rollup/plugin-eslint';
 import camelcase from 'camelcase';
 import pkg from './package.json';
 
@@ -47,11 +47,6 @@ const plugins = [
      */
     exclude: [/node_modules/, /node_modules[\\/]core-js/],
   }),
-  eslint({
-    extensions: ['.js', '.ts'],
-    filterInclude: ['src/**'],
-    filterExclude: ['node_modules/**'],
-  }),
   isProd && filesize(),
 ].filter(Boolean);
 
@@ -80,6 +75,14 @@ export default [
         cleaner({
           targets: ['./dist/'],
         }),
+      /**
+       * https://github.com/rollup/plugins/tree/master/packages/eslint
+       * - 注意放到靠前位置
+       */
+      eslint({
+        fix: true,
+        include: ['src/**/*.{js?(x),ts?(x)}'],
+      }),
       ...plugins,
       /**
        * cjs、es 模块，第三方依赖不编译到产物中
