@@ -6,6 +6,8 @@ import { DEFAULT_EXTENSIONS } from '@babel/core';
 import alias from '@rollup/plugin-alias';
 import json from '@rollup/plugin-json';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import builtins from 'rollup-plugin-node-builtins';
+import url from '@rollup/plugin-url';
 import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import replace from '@rollup/plugin-replace';
@@ -19,10 +21,13 @@ const libraryNamePascalCase = camelcase(libraryName, { pascalCase: true });
 const isProd = process.env.NODE_ENV === 'production';
 
 const plugins = [
-  commonjs(),
+  builtins(),
+  url(),
   nodeResolve({
     extensions: [...DEFAULT_EXTENSIONS, '.ts', '.json'],
+    mainFields: ['browser', 'jsnext:main', 'module', 'main'],
   }),
+  commonjs(),
   alias({
     entries: {
       '@': path.resolve(__dirname, 'src'),
