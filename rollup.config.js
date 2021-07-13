@@ -100,7 +100,6 @@ export default [
       {
         file: pkg.unpkg,
         format: 'umd',
-        exports: 'named',
         name: libraryNamePascalCase,
         // 不想要打包到产物的第三方依赖，在此处声明外部引入时的全局对象名
         // https://www.rollupjs.org/guide/en/#outputglobals
