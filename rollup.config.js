@@ -1,5 +1,5 @@
 import path from 'path';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { nodeResolve, DEFAULTS } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
@@ -24,7 +24,7 @@ const plugins = [
   builtins(),
   url(),
   nodeResolve({
-    extensions: [...DEFAULT_EXTENSIONS, '.ts', '.json'],
+    extensions: [...DEFAULTS.extensions, '.ts'],
     mainFields: ['browser', 'jsnext:main', 'module', 'main'],
   }),
   commonjs(),
