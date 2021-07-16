@@ -49,14 +49,18 @@ yarn build          # 打包 & 类型检查 & 生成声明文件
 yarn demo           # 运行 demo 测试（vite）
 yarn test           # 启动 Jest 测试 & 查看测试覆盖率 & 类型检查（test 目录）
 
-yarn release            # 根据 commit 提交，自动升级 version、生成 CHANGELOG.md
-yarn release:patch      # 自动升级小版本号、生成 CHANGELOG.md
-yarn release:minor      # 自动升级次版本号、生成 CHANGELOG.md
-yarn release:major      # 自动升级主版本号、生成 CHANGELOG.md
-
-yarn commit         # 交互式书写 commit message
 yarn lint           # 运行 eslint，查看 lint 提示
 yarn lint:fix       # 运行 eslint & 自动 fix 代码
+
+yarn commit             # （推荐）交互式书写 commit message
+yarn changelog          # （推荐）根据 commit message，自动升级 version、生成 CHANGELOG.md
+# 更多命令
+# yarn changelog -- -f                # 初次创建项目，执行命令生成 CHANGELOG.md
+# yarn changelog -- -r patch          # 指定本次仅升级 patch 版本
+# yarn changelog -- -r minor          # 指定本次仅升级 minor 版本
+# yarn changelog -- -r major          # 指定本次仅升级 major 版本
+# yarn changelog -- -p alpha          # 指定本次升级 alpha 版本
+# yarn changelog -- -p beta           # 指定本次升级 beta 版本
 ```
 
 ## Remark

@@ -32,10 +32,7 @@
     "lint": "eslint \"src/**/*.{js?(x),ts?(x)}\"",
     "lint:fix": "eslint \"src/**/*.{js?(x),ts?(x)}\" --fix",
     "commit": "git-cz",
-    "release": "standard-version",
-    "release:patch": "standard-version --releaseAs patch",
-    "release:minor": "standard-version --releaseAs minor",
-    "release:major": "standard-version --releaseAs major",
+    "changelog": "standard-version -n",
     "postinstall": "ts-node tools/init"
   },
   "gitHooks": {
@@ -114,7 +111,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^6.1.0",
     "shelljs": "^0.8.4",
-    "standard-version": "^9.1.1",
+    "standard-version": "^9.3.1",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3",
