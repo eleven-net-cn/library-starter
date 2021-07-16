@@ -2,8 +2,6 @@
 
 快速生成 TypeScript 类库、SDK 开发环境
 
-主要特性：
-
 - ✅ 提供 rollup 编译环境，输出 es module、commonjs 和 umd 模块代码
   - Babel 编译 TypeScript 代码
   - TSC 代码检查、生成声明文件
