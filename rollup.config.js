@@ -109,6 +109,7 @@ function createRollupConfig(module) {
                 proposals: true,
               },
               useESModules: module === 'es',
+              version: require('@babel/runtime-corejs3/package.json').version,
             },
           ],
           [
