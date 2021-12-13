@@ -92,7 +92,13 @@ function createRollupConfig(module) {
             },
           ],
           '@babel/preset-typescript',
-          '@babel/preset-react',
+          [
+            '@babel/preset-react',
+            {
+              // react 17+ 新的运行时
+              runtime: 'automatic',
+            },
+          ],
         ],
         plugins: [
           [
