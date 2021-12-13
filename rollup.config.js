@@ -20,63 +20,19 @@ const libraryName = '--libraryname--';
 const libraryNamePascalCase = camelcase(libraryName, { pascalCase: true });
 const isProd = process.env.NODE_ENV === 'production';
 
-const plugins = [
-  builtins(),
-  url(),
-  nodeResolve({
-    extensions: [...DEFAULTS.extensions, '.ts'],
-    mainFields: ['browser', 'jsnext:main', 'module', 'main'],
-  }),
-  commonjs(),
-  alias({
-    entries: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-  }),
-  json(),
-  replace({
-    values: {
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    },
-    preventAssignment: true,
-  }),
-  babel({
-    babelHelpers: 'runtime',
-    extensions: [...DEFAULT_EXTENSIONS, '.ts'],
-    /**
-     * Babel 编译时，会处理 core-js（未来可能会被修复），
-     * 导致 polyfill 内部代码发生了变化，产生一些微小的影响，如 Symbol 问题。
-     * 暂时我们手动声明略过。
-     * https://github.com/zloirock/core-js/issues/514
-     * https://github.com/rails/webpacker/pull/2031
-     */
-    exclude: [/node_modules/, /node_modules[\\/]core-js/],
-  }),
-  isProd && filesize(),
-].filter(Boolean);
-
-export default [
-  {
+/**
+ * rollup 配置
+ * @param {String} module 'es' | 'cjs' | 'umd'
+ */
+function createRollupConfig(module) {
+  const config = {
     input: `src/${libraryName}.ts`,
-    output: [
-      {
-        file: pkg.main,
-        format: 'cjs',
-        exports: 'named',
-        sourcemap: true,
-      },
-      {
-        file: pkg.module,
-        format: 'es',
-        exports: 'named',
-        sourcemap: true,
-      },
-    ],
     watch: {
       include: 'src/**',
     },
     plugins: [
       isProd &&
+        module === 'es' &&
         cleaner({
           targets: ['./dist/'],
         }),
@@ -84,52 +40,97 @@ export default [
        * https://github.com/rollup/plugins/tree/master/packages/eslint
        * - 注意放到靠前位置
        */
-      eslint({
-        fix: true,
-        include: ['src/**/*.{js?(x),ts?(x)}'],
+      module === 'es' &&
+        eslint({
+          fix: true,
+          include: ['src/**/*.{js?(x),ts?(x)}'],
+        }),
+      builtins(),
+      url(),
+      nodeResolve({
+        extensions: [...DEFAULTS.extensions, '.ts'],
+        mainFields: ['browser', 'jsnext:main', 'module', 'main'],
       }),
-      ...plugins,
+      commonjs(),
+      alias({
+        entries: {
+          '@': path.resolve(__dirname, 'src'),
+        },
+      }),
+      json(),
+      replace({
+        values: {
+          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        },
+        preventAssignment: true,
+      }),
+      babel({
+        babelHelpers: 'runtime',
+        extensions: [...DEFAULT_EXTENSIONS, '.ts'],
+        /**
+         * Babel 编译时，会处理 core-js（未来可能会被修复），
+         * 导致 polyfill 内部代码发生了变化，产生一些微小的影响，如 Symbol 问题。
+         * 暂时我们手动声明略过。
+         * https://github.com/zloirock/core-js/issues/514
+         * https://github.com/rails/webpacker/pull/2031
+         */
+        exclude: [/node_modules/, /node_modules[\\/]core-js/],
+        assumptions: {
+          /**
+           * https://babeljs.io/docs/en/assumptions#setpublicclassfields
+           *
+           * 装饰器的 legancy: true，依赖此配置
+           *  - https://babeljs.io/docs/en/babel-plugin-proposal-decorators#legacy
+           */
+          setPublicClassFields: true,
+        },
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              modules: false,
+            },
+          ],
+          '@babel/preset-typescript',
+          '@babel/preset-react',
+        ],
+        plugins: [
+          [
+            '@babel/plugin-transform-runtime',
+            {
+              corejs: {
+                version: 3,
+                proposals: true,
+              },
+              useESModules: module === 'es',
+            },
+          ],
+          [
+            // @babel/plugin-proposal-decorators 需要在 @babel/plugin-proposal-class-properties 之前
+            '@babel/plugin-proposal-decorators',
+            {
+              legacy: true, // 推荐
+            },
+          ],
+          ['@babel/plugin-proposal-class-properties'],
+        ],
+      }),
+      isProd && filesize(),
       /**
-       * cjs、es 模块，第三方依赖不编译到产物中
-       * dependencies、peerDependencies 依赖都将被自动加入到 externals 中
-       * https://github.com/pmowrer/rollup-plugin-peer-deps-external#readme
+       * - cjs、es 模块，第三方依赖不编译到产物中
+       *  dependencies、peerDependencies 依赖都将被自动加入到 externals 中
+       *  https://github.com/pmowrer/rollup-plugin-peer-deps-external#readme
+       * - umd 模块，仅将 peerDependencies 自动加入到 externals 中（dependencies 依赖将被编译到产物中）
+       *  https://github.com/pmowrer/rollup-plugin-peer-deps-external#readme
+       *  因此你需要：
+       *    - 在 package.json/peerDependencies 中明确指定哪些依赖包不想要被打包
+       *    - 并且，将不想要打包的依赖在上方的 output globals 配置中，添加外部引入时的全局对象名
        */
       peerDepsExternal({
-        includeDependencies: true,
+        includeDependencies: module !== 'umd',
       }),
-    ].filter(Boolean),
-  },
-  {
-    input: `src/${libraryName}.ts`,
-    output: [
-      {
-        file: pkg.unpkg,
-        format: 'umd',
-        name: libraryNamePascalCase,
-        // 不想要打包到产物的第三方依赖，在此处声明外部引入时的全局对象名
-        // https://www.rollupjs.org/guide/en/#outputglobals
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-        sourcemap: true,
-      },
-    ],
-    watch: {
-      include: 'src/**',
-    },
-    plugins: [
-      ...plugins,
-      /**
-       * umd 模块，仅将 peerDependencies 自动加入到 externals 中（dependencies 依赖将被编译到产物中）
-       * https://github.com/pmowrer/rollup-plugin-peer-deps-external#readme
-       *
-       * 因此你需要：
-       *  - 在 package.json/peerDependencies 中明确指定哪些依赖包不想要被打包
-       *  - 并且，将不想要打包的依赖在上方的 output globals 配置中，添加外部引入时的全局对象名
-       */
-      peerDepsExternal(),
       isProd &&
+        module === 'umd' &&
         terser({
           parse: {
             // we want terser to parse ecma 8 code. However, we don't want it
@@ -168,7 +169,45 @@ export default [
             beautify: false,
           },
         }),
-      ,
     ].filter(Boolean),
-  },
-];
+  };
+
+  switch (module) {
+    case 'es':
+      config.output = {
+        file: pkg.module,
+        format: 'es',
+        exports: 'named',
+        sourcemap: true,
+      };
+      break;
+    case 'cjs':
+      config.output = {
+        file: pkg.main,
+        format: 'cjs',
+        exports: 'named',
+        sourcemap: true,
+      };
+      break;
+    case 'umd':
+      config.output = {
+        file: pkg.unpkg,
+        format: 'umd',
+        name: libraryNamePascalCase,
+        // 不想要打包到产物的第三方依赖，在此处声明外部引入时的全局对象名
+        // https://www.rollupjs.org/guide/en/#outputglobals
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+        sourcemap: true,
+      };
+      break;
+    default:
+      break;
+  }
+
+  return config;
+}
+
+export default ['es', 'cjs', 'umd'].map(module => createRollupConfig(module));
