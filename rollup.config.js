@@ -88,7 +88,11 @@ function createRollupConfig(module) {
           [
             '@babel/preset-env',
             {
-              modules: false,
+              useBuiltIns: false, // 默认：false
+              // Exclude transforms that make all code slower
+              exclude: ['transform-typeof-symbol'],
+              // https://babeljs.io/docs/en/babel-preset-env#modules
+              modules: false, // 不转化 es modules 代码，让 tree-shaking 生效
             },
           ],
           '@babel/preset-typescript',
@@ -101,6 +105,8 @@ function createRollupConfig(module) {
           ],
         ],
         plugins: [
+          'babel-plugin-macros',
+          'babel-plugin-annotate-pure-calls',
           [
             '@babel/plugin-transform-runtime',
             {
