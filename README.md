@@ -2,11 +2,11 @@
 
 快速生成 TypeScript 类库、SDK 开发环境
 
-- ✅ 提供 Rollup 编译环境，输出 ES Module、CommonJS 及 UMD 代码
-- ✅ 提供 Jest 单元测试
-- ✅ 提供 Demo 调试（Vite）
-- ✅ 代码规范约束（集成 eslint、prettier、lint-staged、commitizen、commitlint 等）
-- ✅ 自动生成 version、changelog（standard-version）
+✅ 提供 Rollup 编译环境，输出 ES Module、CommonJS 及 UMD 代码
+✅ 提供 Jest 单元测试
+✅ 提供 Demo 调试（Vite）
+✅ 代码规范约束（集成 eslint、prettier、lint-staged、commitizen、commitlint 等）
+✅ 自动生成 version、changelog（standard-version）
 
 ## Usage
 
