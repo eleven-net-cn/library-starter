@@ -6,7 +6,7 @@
   "main": "dist/--libraryname--.js",
   "module": "dist/--libraryname--.es.js",
   "unpkg": "dist/--libraryname--.umd.js",
-  "typings": "dist/types/--libraryname--.d.ts",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
