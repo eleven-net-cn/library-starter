@@ -28,7 +28,7 @@
     "build": "concurrently \"rollup -c --environment NODE_ENV:production\" \"tsc\"",
     "test": "jest --coverage --watchAll",
     "demo": "cd demo && yarn start",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "yarn build && yarn changelog",
     "lint": "eslint \"src/**/*.{js?(x),ts?(x)}\"",
     "lint:fix": "eslint \"src/**/*.{js?(x),ts?(x)}\" --fix",
     "commit": "git-cz",

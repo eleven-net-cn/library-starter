@@ -13,6 +13,7 @@ const modifyFiles = [
   'package.json',
   'rollup.config.js',
   'rollup.config.ts',
+  'src/index.ts',
   'test/library.test.ts',
 ];
 const renameFiles = [

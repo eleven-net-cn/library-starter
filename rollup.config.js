@@ -16,8 +16,7 @@ import eslint from '@rollup/plugin-eslint';
 import camelcase from 'camelcase';
 import pkg from './package.json';
 
-const libraryName = '--libraryname--';
-const libraryNamePascalCase = camelcase(libraryName, { pascalCase: true });
+const libraryNamePascalCase = camelcase('--libraryname--', { pascalCase: true });
 const isProd = process.env.NODE_ENV === 'production';
 
 /**
@@ -26,7 +25,7 @@ const isProd = process.env.NODE_ENV === 'production';
  */
 function createRollupConfig(module) {
   const config = {
-    input: `src/${libraryName}.ts`,
+    input: `src/index.ts`,
     watch: {
       include: 'src/**',
     },
