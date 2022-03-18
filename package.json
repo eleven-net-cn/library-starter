@@ -30,7 +30,7 @@
     "demo": "cd demo && yarn start",
     "prepublishOnly": "yarn build && yarn changelog",
     "lint": "eslint \"src/**/*.{js?(x),ts?(x)}\"",
-    "lint:fix": "eslint \"src/**/*.{js?(x),ts?(x)}\" --fix",
+    "lint:fix": "yarn lint --fix",
     "commit": "git-cz",
     "changelog": "standard-version -n",
     "postinstall": "ts-node tools/init"
@@ -52,7 +52,7 @@
       "prettier --parser=typescript --write"
     ],
     "src/**/*.{ts,tsx,js,jsx}": [
-      "eslint \"src/**/*.{js?(x),ts?(x)}\" --fix --max-warnings 0"
+      "yarn lint:fix --max-warnings 0"
     ]
   },
   "commitlint": {
