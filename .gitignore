@@ -13,3 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 
 dist
+
+# jest
+/coverage
