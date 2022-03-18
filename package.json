@@ -52,7 +52,7 @@
       "prettier --parser=typescript --write"
     ],
     "src/**/*.{ts,tsx,js,jsx}": [
-      "npm run lint:fix"
+      "eslint \"src/**/*.{js?(x),ts?(x)}\" --fix --max-warnings 0"
     ]
   },
   "commitlint": {
