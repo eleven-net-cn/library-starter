@@ -26,7 +26,7 @@
   "scripts": {
     "start": "concurrently \"rollup -c --environment NODE_ENV:development -w\" \"tsc -p tsconfig.spec.json -w\"",
     "build": "concurrently \"rollup -c --environment NODE_ENV:production\" \"tsc\"",
-    "test": "jest --coverage --watchAll",
+    "test": "jest --watchAll",
     "demo": "cd demo && yarn start",
     "prepublishOnly": "yarn build && yarn changelog",
     "lint": "eslint \"src/**/*.{js?(x),ts?(x)}\"",
