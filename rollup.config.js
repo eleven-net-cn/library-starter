@@ -30,8 +30,7 @@ function createRollupConfig(module) {
       include: 'src/**',
     },
     plugins: [
-      isProd &&
-        module === 'es' &&
+      module === 'es' &&
         cleaner({
           targets: ['./dist/'],
         }),
