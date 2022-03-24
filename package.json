@@ -119,7 +119,5 @@
     "typescript": "^4.2.3",
     "yorkie": "^2.0.0"
   },
-  "resolutions": {
-    "remark": "11.0.2"
-  }
+  "resolutions": {}
 }
