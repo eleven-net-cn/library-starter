@@ -212,6 +212,7 @@ function createRollupConfig(module) {
           'react-dom': 'ReactDOM',
           axios: 'axios',
         },
+        exports: 'named',
         sourcemap: true,
       };
       break;
