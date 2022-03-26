@@ -1,7 +1,7 @@
 import '@eleven.fe/reset.css';
 import React, { useEffect } from 'react';
 import { render } from 'react-dom';
-// import func from '../../src/library';
+// import func from '../../src';
 
 const App = () => {
   // useEffect(() => {
