@@ -15,7 +15,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "emitDeclarationOnly": true, // 仅输出类型定义文件
-    "jsx": "react",
+    "jsx": "react-jsx",
     "declarationDir": "dist/types",
     "outDir": "dist/lib",
     "typeRoots": ["node_modules/@types"],
