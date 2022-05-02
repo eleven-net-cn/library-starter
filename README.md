@@ -2,12 +2,12 @@
 
 快速生成 TypeScript/React 类库、SDK 开发环境
 
-- ✅ 提供 Rollup 编译环境，输出 ES Module、CommonJS 及 UMD 代码
-- ✅ 支持 React 开发环境、类库打包
-- ✅ 支持 Jest 单元测试
-- ✅ 支持 Demo 调试（Vite）
-- ✅ 代码规范约束（支持 eslint、prettier、lint-staged、commitizen、commitlint 等）
-- ✅ 自动生成 version、changelog（standard-version）
+✅ 提供 Rollup 编译环境，输出 ES Module、CommonJS 及 UMD 代码  
+✅ 支持 React 开发环境、类库打包  
+✅ 支持 Jest 单元测试  
+✅ 支持 Demo 调试（Vite）  
+✅ 代码规范约束（支持 eslint、prettier、lint-staged、commitizen、commitlint 等）  
+✅ 自动生成 version、changelog（standard-version）
 
 ## Usage
 
