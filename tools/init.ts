@@ -14,11 +14,11 @@ const modifyFiles = [
   'rollup.config.js',
   'rollup.config.ts',
   'src/index.ts',
-  'src/test/library.test.ts',
+  'src/tests/library.test.ts',
 ];
 const renameFiles = [
   ['src/library.ts', 'src/--libraryname--.ts'],
-  ['src/test/library.test.ts', 'src/test/--libraryname--.test.ts'],
+  ['src/tests/library.test.ts', 'src/test/--libraryname--.test.ts'],
 ];
 
 // Clear console
