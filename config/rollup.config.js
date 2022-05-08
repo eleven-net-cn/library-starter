@@ -1,39 +1,34 @@
-import path from 'path';
-import { nodeResolve, DEFAULTS } from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
-import { DEFAULT_EXTENSIONS } from '@babel/core';
-import alias from '@rollup/plugin-alias';
-import json from '@rollup/plugin-json';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import builtins from 'rollup-plugin-node-builtins';
-import url from '@rollup/plugin-url';
-import { terser } from 'rollup-plugin-terser';
-import filesize from 'rollup-plugin-filesize';
-import replace from '@rollup/plugin-replace';
-import cleaner from 'rollup-plugin-cleaner';
-import eslint from '@rollup/plugin-eslint';
-import camelcase from 'camelcase';
-import pkg from './package.json';
+const path = require('path');
+const { nodeResolve, DEFAULTS } = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
+const { babel } = require('@rollup/plugin-babel');
+const { DEFAULT_EXTENSIONS } = require('@babel/core');
+const alias = require('@rollup/plugin-alias');
+const json = require('@rollup/plugin-json');
+const peerDepsExternal = require('rollup-plugin-peer-deps-external');
+const builtins = require('rollup-plugin-node-builtins');
+const url = require('@rollup/plugin-url');
+const { terser } = require('rollup-plugin-terser');
+const filesize = require('rollup-plugin-filesize');
+const replace = require('@rollup/plugin-replace');
+const eslint = require('@rollup/plugin-eslint');
+const camelcase = require('camelcase');
+const pkg = require('../package.json');
 
 const libraryNamePascalCase = camelcase('--libraryname--', { pascalCase: true });
 const isProd = process.env.NODE_ENV === 'production';
 
 /**
- * rollup 配置
+ * Create Rollup Config
  * @param {String} module 'es' | 'cjs' | 'umd'
  */
-function createRollupConfig(module) {
+module.exports = function (module) {
   const config = {
     input: `src/index.ts`,
     watch: {
       include: 'src/**',
     },
     plugins: [
-      module === 'es' &&
-        cleaner({
-          targets: ['./dist/'],
-        }),
       /**
        * https://github.com/rollup/plugins/tree/master/packages/eslint
        * - 注意放到靠前位置
@@ -221,6 +216,4 @@ function createRollupConfig(module) {
   }
 
   return config;
-}
-
-export default ['es', 'cjs', 'umd'].map(module => createRollupConfig(module));
+};
