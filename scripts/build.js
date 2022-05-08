@@ -37,7 +37,7 @@ async function build() {
       const time = ((Date.now() - startAt) / 1000).toFixed(2);
 
       console.log(
-        chalk.green(`Created ${chalk.bold(outputFiles.join(', '))} in ${chalk.bold(`${time}ms`)}`)
+        chalk.green(`Created ${chalk.bold(outputFiles.join(', '))} in ${chalk.bold(`${time}s`)}`)
       );
     }
 
