@@ -26,8 +26,7 @@ async function build() {
   try {
     const startAt = Date.now();
 
-    for (let i = 0; i < configs.length; i++) {
-      const config = configs[i];
+    for (const config of configs) {
       const output = ensureArray(config.output);
       const outputFiles = output.map(o => relativePath(o.file));
       console.log(
