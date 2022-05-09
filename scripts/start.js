@@ -15,9 +15,6 @@ const { registerShutdown, printError, relativePath } = require('../config/utils'
 const configs = ['umd', 'cjs', 'es'].map(module => configFactory(module));
 const watcher = rollup.watch(configs);
 
-// when the process ends
-registerShutdown(() => watcher.close());
-
 watcher.on('event', event => {
   switch (event.code) {
     case 'START':
@@ -43,3 +40,6 @@ watcher.on('event', event => {
       break;
   }
 });
+
+// when the process ends
+registerShutdown(() => watcher.close());
