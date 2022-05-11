@@ -53,7 +53,7 @@
       "prettier --parser=typescript --write"
     ],
     "src/**/*.{ts,tsx,js,jsx}": [
-      "yarn lint:fix --max-warnings 0"
+      "nr lint:fix --max-warnings 0"
     ]
   },
   "commitlint": {
