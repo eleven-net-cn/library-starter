@@ -107,7 +107,6 @@ module.exports = function (module) {
                 version: 3,
                 proposals: true,
               },
-              useESModules: module === 'es',
               version: require('@babel/runtime-corejs3/package.json').version,
             },
           ],
