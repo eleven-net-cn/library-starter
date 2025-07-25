@@ -1,3 +1,5 @@
+!! No longer used, recommended https://github.com/eleven-net-cn/create-app
+
 # [library-starter](https://github.com/eleven-net-cn/library-starter)
 
 快速生成 TypeScript/React 类库、SDK 开发环境
